@@ -1,0 +1,3 @@
+[submodule "libft"]
+	path = libft
+	url = http://gogs.ded.eelon.moe/Lon/libft.git
