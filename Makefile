@@ -6,12 +6,12 @@
 #    By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/07 18:21:40 by rliou-ke          #+#    #+#              #
-#    Updated: 2016/04/26 11:18:30 by rliou-ke         ###   ########.fr        #
+#    Updated: 2016/04/26 16:25:47 by rliou-ke         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	lem-in
-SRC		=	main.c get_next_line.c
+SRC		=	main.c get_next_line.c find_antsnbr.c str_parse.c
 OBJDIR	=	trash
 OBJ		=	$(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 LIB		=	-L libft/ -lft
