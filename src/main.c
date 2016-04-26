@@ -6,148 +6,102 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/03/17 18:16:52 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/26 11:54:24 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
 
-static char		*find_str_ants(char *line)
+static t_list	**ft_lsttower(t_list **head, char *str)
 {
-	static char	*number = NULL;
-	char		*str;
+	t_list	*new;
+	size_t	len;
 
-	if (number)
-		return (number);
-	if (line[0] == '#' || !line[0])
-		return (NULL);
-	else
-	{
-		str = line;
-		while (*str)
-		{
-			if (!isdigit(*str))
-				return (NULL);
-			str++;
-		}
-		if (!(number = ft_strdup(line)))
-			ft_exit_error("find_str_ants: ft_strdup: number");
-		return (number);
-	}
-}
-
-void		ft_dome_add(t_dome **begin, t_dome *new)
-{
-	t_dome	*current;
-	t_dome	*prev;
-
-	prev = NULL;
-	current = *begin;
-	while (current != NULL)
-	{
-		prev = current;
-		current = current->next;
-	}
-	new->next = NULL;
-	if (prev == NULL)
-		*begin = new;
-	else
-		prev->next = new;
-}
-
-static int		is_reg_room(int *room, char *line)
-{
-	if (ft_strequ("##start", line))
-	{
-		*room = 1;
-		return (0);
-	}
-	else if (ft_strequ("##end", line))
-	{
-		*room = 2;
-		return (0);
-	}
-	return (1);
-}
-
-static void		get_cd(char *str, int *x, int *y)
-{
-	int			n;
-	int			i;
-
-	if ((n = ft_getnbr(str)) != 2)
-		ft_exit_error("ERROR: Input error: coordinate");
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]))
-		{
-			if (n == 2)
-				*x = ft_atoi(&str[i]);
-			else (n == 1)
-				*y = ft_atoi(&str[i]);
-			n--;
-			while (ft_isdigit(str[i]))
-				i++;
-		}
-		else
-			i++;
-	}
-}
-
-static void		fill_data(char *line, t_dome **node)
-{
-	char		*str;
-
-	str = *line;
-	if (*str && (*str == '#' || *str == 'L'))
-		ft_exit_error("ERROR");
-	while (!ft_isblank(*str) && *str)
-		++str;
-	if (!((*node)->name = ft_strsub(line, 0, str - line)))
-		ft_exit_error("get_cd: ft_strsub: str");
-	get_cd(str + 1, (*node)->x, ((*node)->y));
-}
-
-static t_dome	*room_node(char *line, char *ants)
-{
-	static short	room = 0;
-	t_dome			*new;
-	char			*name;
-
-	if (!ants || !line || !line[0] || !is_reg_room(&room, line))
-		return (NULL);
 	if (!(new = malloc(sizeof(*new))))
-		ft_exit_error("room_node: malloc: new");
-	if (room == 0)
-		new->type = RGROOM;
-	else if (room == 1)
-		new->type = STROOM;
-	else if (room == 2)
-		new->type = EDROOM;
-	room = 0;
-	fill_data(line, &new);
+		ft_exit_error("find_antsnbr: file: malloc");
+	len = ft_strlen(str);
+	if (!(new->content = malloc(sizeof(char *) * (len + 1))))
+		ft_exit_error("find_antsnbr: file->data: malloc");
+	new->content = ft_strcpy(new->content, str);
+	new->content_size = len;
 	new->next = NULL;
-	return (new);
+	ft_lstappend(head, new);
+	return (head);
+}
+
+static int		get_antsnbr(char *str)
+{
+	int			a;
+	char		*check;
+
+	a = ft_atoi(str);
+	ft_putnbr(a);
+	if (!(check = ft_itoa(a)))
+		return (0);
+	if (ft_strequ(check, str) && a > 0)
+		return (a);
+	return (0);
+}
+
+int				str_iscomment(char *str)
+{
+	return (str[0] == '#' && str[1] != '#');
+}
+
+int				str_iscommand(char *str, int strict)
+{
+	if (strict)
+		return (ft_strncmp(str, "##", 2) == 0);
+	else
+		return (ft_strequ(str, "##start") || ft_strequ(str, "##end"));
+}
+
+static int	free_zero(char **str)
+{
+	free(*str);
+	str = NULL;
+	return (0);
+}
+
+static int		find_antsnbr(t_list **file)
+{
+	int 	ret;
+	char	*line;
+	char	*str;
+
+	while ((ret = get_next_line(0, &line)) > 0)
+	{
+		file = ft_lsttower(file, line);
+		if (str_iscommand(line, 1))
+			return (free_zero(&line));
+		if (!str_iscomment(line))
+		{
+			str = line;
+			while (*str)
+			{
+				if (!ft_isdigit(*str))
+					return (free_zero(&line));
+				++str;
+			}
+			free(line);
+			return (get_antsnbr(line));
+		}
+		free(line);
+	}
+	return (0);
 }
 
 int					main(void)
 {
-	t_dome			*rooms;
-	t_dome			*node;
-	char			*line;
-	char			*ants;
-	unsigned short	ret;
+	t_list		*file;
+	int			anb;
 
-	rooms = NULL;
-	while ((ret = get_next_line(0, &line)) > 0)
-	{
-		ants = find_str_ants(line);
-		if ((node = room_node(line, ants)))
-			ft_dome_add(&rooms, node);
-				
-	}
-	if (ret == -1)
-		return (ft_error("gnl error"));
+	file = NULL;
+	anb = find_antsnbr(&file);
+	if (!anb)
+		return (ft_error("ERROR"));
+	ft_putnbr(anb);
+	ft_putstr("\n");
+
 	return (0);
 }
