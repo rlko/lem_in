@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:17:02 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/26 13:20:37 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/27 14:34:00 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		str_iscomment(char *str)
 
 int		str_iscommand(char *str, int strict)
 {
+	if (!str)
+		ft_exit_error("str_iscommand: str is null");
 	if (strict)
 		return (ft_strncmp(str, "##", 2) == 0);
 	else
