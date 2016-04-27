@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/27 16:20:20 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/27 16:26:27 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,17 @@ void		assign_room(t_list *lst, t_dome **room)
 
 void		assign_type(t_dome **room, char *prev)
 {
-	if (strequ("##start", prev))
+	if (ft_strequ("##start", prev))
 	{
-		room->type = STROOM;
+		(*room)->type = STROOM;
 	}
-	else if (strequ("##end", prev))
+	else if (ft_strequ("##end", prev))
 	{
-		room->type = EDROOM;
+		(*room)->type = EDROOM;
 	}
 	else
 	{
-		room->type = RGROOM;
+		(*room)->type = RGROOM;
 	}
 }
 
@@ -119,7 +119,7 @@ t_dome		*mk_rooms(t_dome *head, char **prev, char *line)
 		ft_exit_error("ERROR");
 	if (!(room = malloc(sizeof(*room))))
 		ft_exit_error("mk_rooms: room: malloc");
-	if (!(lst = ft_lstsplit(line, " ")))
+	if (!(lst = ft_lstsplit(line, ' ')))
 		ft_exit_error("mk_rooms: lst: ft_lstsplit");
 	assign_room(lst, &room);
 	assign_type(&room, *prev);
@@ -135,11 +135,11 @@ t_dome		*mk_rooms(t_dome *head, char **prev, char *line)
 	return (head);
 }
 
-char		*check_command(char *prev, char *line)
+char		*check_command(t_list *file, char *prev, char *line)
 {
 	if (prev)
 		ft_exit_error("ERROR");
-	prev = ft_prevstr(*file);
+	prev = ft_prevstr(file);
 	if (str_iscommand(line, 0) && str_iscommand(prev, 0))
 		ft_exit_error("ERROR");
 	return (prev);
@@ -159,7 +159,7 @@ t_dome		*find_rooms(t_list **file)
 	{	
 		file = ft_lsttower(file, line);
 		if (ret[1])
-			prev = check_command(prev, line);
+			prev = check_command(*file, prev, line);
 		if (!str_iscomment(line) && !str_iscommand(line, 1))
 			rooms = mk_rooms(rooms, &prev, line);
 		if ((ret[1] = is_unique(line)) > 1)
