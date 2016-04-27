@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/27 15:40:04 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/27 16:20:20 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,64 @@ t_dome		*build_rooms(t_dome **head)
 }
 */
 
+void		assign_coord(char *str, int *cd)
+{
+	if (ft_strequ(ft_itoa(ft_atoi(str)), str))
+	{
+		*cd = ft_atoi(str);
+		ft_strdel(&str);
+	}
+	else
+		ft_exit_error("ERROR: coords");
+}
+
 void		assign_room(t_list *lst, t_dome **room)
 {
-	int i;
+	int		i;
+	t_list	*tmp;
 
+	if ((i = ft_lstlen(lst)) != 3)
+		ft_exit_error("ERROR");
 	i = 0;
-	while (lst)
+	while (lst != NULL)
 	{
+		tmp = lst;
 		if (i == 0)
 			(*room)->name = lst->content;
-		if (i == 1)
-			(*room)->x = ft_atoi(lst->content);
-		if (i == 2)
-			(*room)->y = ft_atoi(lst->content);
+		else
+		{
+			if (i == 1)
+				assign_coord(lst->content, &(*room)->x);
+			else if (i == 2)
+				assign_coord(lst->content, &(*room)->y);
+			else
+				ft_exit_error("assign_room: wut");
+		}
 		lst = lst->next;
+		free(tmp);
 		++i;
 	}
 }
 
-t_dome		*mk_rooms(char **prev, char *line)
+void		assign_type(t_dome **room, char *prev)
 {
+	if (strequ("##start", prev))
+	{
+		room->type = STROOM;
+	}
+	else if (strequ("##end", prev))
+	{
+		room->type = EDROOM;
+	}
+	else
+	{
+		room->type = RGROOM;
+	}
+}
+
+t_dome		*mk_rooms(t_dome *head, char **prev, char *line)
+{
+	t_dome	*tmp;
 	t_dome	*room;
 	t_list	*lst;
 
@@ -84,9 +122,17 @@ t_dome		*mk_rooms(char **prev, char *line)
 	if (!(lst = ft_lstsplit(line, " ")))
 		ft_exit_error("mk_rooms: lst: ft_lstsplit");
 	assign_room(lst, &room);
+	assign_type(&room, *prev);
+	room->next = NULL;
 	if (*prev)
 		*prev = NULL;
-	return (room);
+	if (head == NULL)
+		return (room);
+	tmp = head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = room;
+	return (head);
 }
 
 char		*check_command(char *prev, char *line)
@@ -115,7 +161,7 @@ t_dome		*find_rooms(t_list **file)
 		if (ret[1])
 			prev = check_command(prev, line);
 		if (!str_iscomment(line) && !str_iscommand(line, 1))
-			rooms = mk_rooms(&prev, line);
+			rooms = mk_rooms(rooms, &prev, line);
 		if ((ret[1] = is_unique(line)) > 1)
 			ft_exit_error("ERROR");
 	}
