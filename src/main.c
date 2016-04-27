@@ -206,6 +206,7 @@ t_dome		*find_rooms(t_list **file)
 		}
 		if ((ret[1] = is_unique(line)) > 1)
 			ft_exit_error("ERROR");
+		free(line);
 	}
 	return (rooms);
 }	

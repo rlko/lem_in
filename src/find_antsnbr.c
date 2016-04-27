@@ -23,7 +23,11 @@ static int		get_antsnbr(char *str)
 	if (!(check = ft_itoa(a)))
 		return (0);
 	if (ft_strequ(check, str) && a > 0)
+	{
+		ft_strdel(&str);
 		return (a);
+	}
+	ft_strdel(&str);
 	return (0);
 }
 
@@ -54,7 +58,6 @@ int				find_antsnbr(t_list **file)
 					return (free_zero(&line));
 				++str;
 			}
-			free(line);
 			return (get_antsnbr(line));
 		}
 		free(line);
