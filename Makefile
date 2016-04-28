@@ -6,12 +6,14 @@
 #    By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/07 18:21:40 by rliou-ke          #+#    #+#              #
-#    Updated: 2016/04/26 16:25:47 by rliou-ke         ###   ########.fr        #
+#    Updated: 2016/04/28 14:21:32 by rliou-ke         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	lem-in
-SRC		=	main.c get_next_line.c find_antsnbr.c str_parse.c
+SRC		=	main.c get_next_line.c find_antsnbr.c str_parse.c \
+			find_rooms.c assign.c mk_rooms.c \
+			test_le-min.c
 OBJDIR	=	trash
 OBJ		=	$(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 LIB		=	-L libft/ -lft

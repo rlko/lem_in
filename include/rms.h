@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/27 16:24:52 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/28 16:38:27 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,20 @@ typedef struct		s_dome
 	char			*name;
 	enum e_type		type;
 	struct s_dome	*next;
-	int				x;
-	int				y;
+	char			*x;
+	char			*y;
+	t_list			*adj;
 }					t_dome;
 
 t_list				**ft_lsttower(t_list **head, char *str);
 int					find_antsnbr(t_list **file);
 int					str_iscomment(char *str);
 int					str_iscommand(char *str, int strict);
+
+void				assign_room(t_list *lst, t_dome **room);
+void				assign_type(t_dome **room, char *prev);
+int					mk_rooms(t_dome **head, char **prev, char *line);
+t_dome				*find_rooms(t_list **file);
+
+void				print_rooms(t_dome *room);
+void				print_file(t_list *file);
