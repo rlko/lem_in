@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/28 17:14:09 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/28 19:57:58 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,60 @@ int			link_isvalid(t_list *lst, t_dome *room)
 	return (1);
 }
 
-void		add_to(char *adj_room, t_dome **node, t_dome **head)
+void		add_to(char *adj_room, t_list **node, t_dome **head)
 {
-	t_dome *tmp;
+	t_dome	*tmp;
+	t_list	*connection;
 
 	tmp = *head;
 	while (tmp)
 	{
 		if (ft_strequ(adj_room, tmp->name))
-			//
+		{
+			connection = ft_lstnew(tmp, sizeof(t_dome));
+			ft_lstappend(node, connection);
+			return ;
+		}
 		tmp = tmp->next;
 	}
+
 }
 
 void		fill_connections(t_list *lst, t_dome **head)
 {
-	t_dome *tmp;
+	ft_putendl("DEBUT: fill_connections");
+	t_dome	*begin;
+	t_dome	*tmp;
 
+	begin = *head;
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		if (ft_strequ(lst->content, tmp->name))
-			add_to(lst->next->content, &tmp, head);
+		if (ft_strequ(lst->next->content, tmp->name))
+		{
+			add_to(lst->content, &tmp->adj, head);
+			break ;
+		}
 		tmp = tmp->next;
 	}
+	*head = begin;
+	while (tmp != NULL)
+	{
+		if (ft_strequ(lst->content, (*head)->name))
+		{
+			add_to(lst->next->content, &(*head)->adj, head);
+			break ;
+		}
+		(*head) = (*head)->next;
+	}
+//	*head = begin;
+	ft_putendl("FIN: fill_connections");
 }
 
+#include <stdio.h>
 void		find_connections(t_list **file, t_dome **room)
 {
+	ft_putendl("DEBUT: find_connections");
 	char	*line;
 	t_list	*lsplit;
 
@@ -100,14 +126,18 @@ void		find_connections(t_list **file, t_dome **room)
 	if (!link_isvalid(lsplit, *room))
 		return ;
 	fill_connections(lsplit, room);
+	ft_putstr(((t_dome *)((*room)->adj->content))->name);
+	/*
 	while (get_next_line(0, &line) > 0)
 	{
 	//...	
-	}
+	}*/
+	ft_putendl("FIN: find_connections");
 }
 
 int			main(void)
 {
+	ft_putendl("DEBUT: main");
 	t_list	*file;
 	int		anb;
 	t_dome	*room;
@@ -124,5 +154,6 @@ int			main(void)
 	print_rooms(room);
 	print_file(file);
 
+	ft_putendl("FIN: main");
 	return (0);
 }
