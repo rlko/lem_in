@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:09:06 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:19:15 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:21:50 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	link_isvalid(t_list *lst, t_dome *room)
 	return (1);
 }
 
-int	get_room_links(char *line, t_dome **room)
+int			get_room_links(char *line, t_dome **room)
 {
 	t_list	*lsplit;
 

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:10:47 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:20:43 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int			main(void)
 		return (ft_error("ERROR"));
 	room = find_rooms(&file);
 	find_connections(&file, &room);
-	print_room_links("7", room);
 	
-
+// DEBUT	TESTS
+	print_room_links("7", room);
 	ft_putendl("\nParsing done:");
 	print_rooms(room);
 	print_file(file);
-
+// FIN		TESTS
 	ft_putendl("FIN: main");
 	return (0);
 }

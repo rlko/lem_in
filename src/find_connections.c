@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:10:22 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:19:24 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:21:42 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*get_last_line(t_list *file)
 
 static void	free_the_intruder(t_list **file)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	t_list	*prev;
 
 	tmp = *file;

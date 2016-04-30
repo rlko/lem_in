@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:03:57 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:04:07 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:22:00 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	add_to(char *adj_room, t_dome **node, t_dome *lst)
 	ft_exit_error("Unexpected Fuck: add_to");
 }
 
-void	fill_connections(t_list *lst, t_dome **head)
+void		fill_connections(t_list *lst, t_dome **head)
 {
 	t_dome	*tmp;
 

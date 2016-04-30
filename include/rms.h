@@ -6,13 +6,14 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:10:40 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:24:39 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RMS_H
+# define RMS_H
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
 #include "gnl.h"
 
@@ -55,3 +56,4 @@ void				find_connections(t_list **file, t_dome **room);
 void				print_rooms(t_dome *room);
 void				print_file(t_list *file);
 void				print_room_links(char *name, t_dome *room);
+#endif
