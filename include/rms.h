@@ -6,16 +6,18 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:24:39 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:26:41 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RMS_H
 # define RMS_H
-#include <unistd.h>
-#include <stdlib.h>
-#include "libft.h"
-#include "gnl.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
+# include "gnl.h"
+
+# define	INTMAX	2147483647
 
 enum		e_type
 {
