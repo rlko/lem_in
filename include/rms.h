@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:26:41 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:28:20 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "gnl.h"
 
-# define	INTMAX	2147483647
+# define INTMAX		2147483647
 
 enum		e_type
 {
@@ -46,13 +46,12 @@ void				assign_type(t_dome **room, char *prev);
 int					mk_rooms(t_dome **head, char **prev, char *line);
 t_dome				*find_rooms(t_list **file);
 
-
 void				fill_connections(t_list *lst, t_dome **head);
 int					get_room_links(char *line, t_dome **room);
 void				find_connections(t_list **file, t_dome **room);
 
 /*
-** tests
+** Tests functions:
 */
 
 void				print_rooms(t_dome *room);

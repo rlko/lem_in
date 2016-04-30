@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:20:43 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:36:26 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,30 @@ t_list		**ft_lsttower(t_list **head, char *str)
 	return (head);
 }
 
+int			find_possibilities()
+
+
 int			main(void)
 {
 	ft_putendl("DEBUT: main");
-	t_list	*file;
 	int		anb;
-	t_dome	*room;
+	t_list	*file;
+	t_dome	*rooms;
+	t_list	*paths;
 
 	file = NULL;
-	room = NULL;
+	rooms = NULL;
+	paths = NULL;
 	if (!(anb = find_antsnbr(&file)))
 		return (ft_error("ERROR"));
-	room = find_rooms(&file);
-	find_connections(&file, &room);
-	
+	rooms = find_rooms(&file);
+	find_connections(&file, &rooms);
+	if (!find_possibilities(&rooms))
+		return (ft_error("ERROR"));
 // DEBUT	TESTS
-	print_room_links("7", room);
+	print_room_links("7", rooms);
 	ft_putendl("\nParsing done:");
-	print_rooms(room);
+	print_rooms(rooms);
 	print_file(file);
 // FIN		TESTS
 	ft_putendl("FIN: main");
