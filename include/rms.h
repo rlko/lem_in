@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 14:19:06 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 19:10:40 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ void				assign_room(t_list *lst, t_dome **room);
 void				assign_type(t_dome **room, char *prev);
 int					mk_rooms(t_dome **head, char **prev, char *line);
 t_dome				*find_rooms(t_list **file);
+
+
+void				fill_connections(t_list *lst, t_dome **head);
+int					get_room_links(char *line, t_dome **room);
+void				find_connections(t_list **file, t_dome **room);
 
 /*
 ** tests
