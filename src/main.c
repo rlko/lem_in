@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/28 19:57:58 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 14:27:53 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,54 +62,63 @@ int			link_isvalid(t_list *lst, t_dome *room)
 	return (1);
 }
 
-void		add_to(char *adj_room, t_list **node, t_dome **head)
+void		add_to(char *adj_room, t_dome **node, t_dome *head)
 {
 	t_dome	*tmp;
 	t_list	*connection;
 
-	tmp = *head;
+	tmp = head;
 	while (tmp)
 	{
 		if (ft_strequ(adj_room, tmp->name))
 		{
 			connection = ft_lstnew(tmp, sizeof(t_dome));
-			ft_lstappend(node, connection);
+			ft_lstappend(&(*node)->adj, connection);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-
+	ft_putstr("nope");
 }
 
 void		fill_connections(t_list *lst, t_dome **head)
 {
 	ft_putendl("DEBUT: fill_connections");
-	t_dome	*begin;
 	t_dome	*tmp;
 
-	begin = *head;
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		if (ft_strequ(lst->content, tmp->name))
+		{
+			add_to(lst->next->content, &tmp, *head);
+			break ;
+		}
+		tmp = tmp->next;
+	}
 	tmp = *head;
 	while (tmp != NULL)
 	{
 		if (ft_strequ(lst->next->content, tmp->name))
 		{
-			add_to(lst->content, &tmp->adj, head);
+			add_to(lst->content, &tmp, *head);
 			break ;
 		}
 		tmp = tmp->next;
 	}
-	*head = begin;
-	while (tmp != NULL)
-	{
-		if (ft_strequ(lst->content, (*head)->name))
-		{
-			add_to(lst->next->content, &(*head)->adj, head);
-			break ;
-		}
-		(*head) = (*head)->next;
-	}
-//	*head = begin;
-	ft_putendl("FIN: fill_connections");
+}
+
+
+void	get_room_links(char *line, t_dome **room)
+{
+	t_list	*lsplit;
+
+	lsplit = ft_lstsplit(line, '-');
+	if (ft_lstlen(lsplit) != 2)
+		ft_exit_error("ERROR: Link format");
+	if (!link_isvalid(lsplit, *room))
+		return ;
+	fill_connections(lsplit, room);
 }
 
 #include <stdio.h>
@@ -117,21 +126,19 @@ void		find_connections(t_list **file, t_dome **room)
 {
 	ft_putendl("DEBUT: find_connections");
 	char	*line;
-	t_list	*lsplit;
 
 	line = get_last_line(*file);
-	lsplit = ft_lstsplit(line, '-');
-	if (ft_lstlen(lsplit) != 2)
-		ft_exit_error("ERROR: Link format");
-	if (!link_isvalid(lsplit, *room))
-		return ;
-	fill_connections(lsplit, room);
-	ft_putstr(((t_dome *)((*room)->adj->content))->name);
-	/*
+	get_room_links(line, room);
+//			ft_putendl(((t_dome *)(tmp->adj->content))->name);
+	
 	while (get_next_line(0, &line) > 0)
 	{
-	//...	
-	}*/
+		file = ft_lsttower(file, line);
+		if (!str_iscomment(line) && !str_iscommand(line, 1))
+		{
+			get_room_links(line, room);
+		}
+	}
 	ft_putendl("FIN: find_connections");
 }
 
@@ -148,6 +155,7 @@ int			main(void)
 		return (ft_error("ERROR"));
 	room = find_rooms(&file);
 	find_connections(&file, &room);
+	print_room_links("7", room);
 	
 
 	ft_putendl("\nParsing done:");

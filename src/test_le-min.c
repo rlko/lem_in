@@ -6,11 +6,35 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 14:10:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/28 14:15:11 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 14:26:54 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
+
+
+void				print_room_links(char *name, t_dome *room)
+{
+	t_list *lst;
+
+	while (room)
+	{
+		if (ft_strequ(room->name, name))
+		{
+			ft_putstr(name);
+			ft_pustr("'s connections: ");
+			lst = room->adj;
+			while (lst)
+			{
+				ft_putstr(((t_dome *)lst->content)->name);
+				ft_putstr(" ");
+				lst = lst->next;
+			}
+		}
+		room = room->next;
+	}
+	ft_putchar('\n');
+}
 
 void				print_rooms(t_dome *room)
 {
