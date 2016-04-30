@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 14:27:53 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/04/30 18:56:19 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,39 @@ int			link_isvalid(t_list *lst, t_dome *room)
 	return (1);
 }
 
-void		add_to(char *adj_room, t_dome **node, t_dome *head)
+int			link_already_exists(t_list *adj, char *str)
 {
-	t_dome	*tmp;
+	while (adj != NULL)
+	{
+		if (ft_strequ(((t_dome *)adj->content)->name, str))
+			return (1);
+		adj = adj->next;
+	}
+	return (0);
+}
+
+void		add_to(char *adj_room, t_dome **node, t_dome *lst)
+{
 	t_list	*connection;
 
-	tmp = head;
-	while (tmp)
+	while (lst != NULL)
 	{
-		if (ft_strequ(adj_room, tmp->name))
+		if (ft_strequ(adj_room, lst->name))
 		{
-			connection = ft_lstnew(tmp, sizeof(t_dome));
-			ft_lstappend(&(*node)->adj, connection);
+			if (!link_already_exists((*node)->adj, adj_room))
+			{
+				connection = ft_lstnew(lst, sizeof(t_dome));
+				ft_lstappend(&(*node)->adj, connection);
+			}
 			return ;
 		}
-		tmp = tmp->next;
+		lst = lst->next;
 	}
-	ft_putstr("nope");
+	ft_exit_error("Unexpected Fuck: add_to");
 }
 
 void		fill_connections(t_list *lst, t_dome **head)
 {
-	ft_putendl("DEBUT: fill_connections");
 	t_dome	*tmp;
 
 	tmp = *head;
@@ -109,16 +120,33 @@ void		fill_connections(t_list *lst, t_dome **head)
 }
 
 
-void	get_room_links(char *line, t_dome **room)
+int		get_room_links(char *line, t_dome **room)
 {
 	t_list	*lsplit;
 
 	lsplit = ft_lstsplit(line, '-');
 	if (ft_lstlen(lsplit) != 2)
-		ft_exit_error("ERROR: Link format");
+		return (0);
 	if (!link_isvalid(lsplit, *room))
-		return ;
+		return (0);
 	fill_connections(lsplit, room);
+	return (1);
+}
+
+void	free_the_intruder(t_list **file)
+{
+	t_list *tmp;
+	t_list	*prev;
+
+	tmp = *file;
+	while (tmp->next != NULL)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	prev->next = NULL;
+	free(tmp->content);
+	free(tmp);
 }
 
 #include <stdio.h>
@@ -127,17 +155,24 @@ void		find_connections(t_list **file, t_dome **room)
 	ft_putendl("DEBUT: find_connections");
 	char	*line;
 
-	line = get_last_line(*file);
-	get_room_links(line, room);
-//			ft_putendl(((t_dome *)(tmp->adj->content))->name);
-	
+	if (!(line = get_last_line(*file)))
+		ft_exit_error("ERROR: wut");
+	if (!get_room_links(line, room))
+	{
+		free_the_intruder(file);
+		return ;
+	}
+//	ft_putendl(((t_dome *)(tmp->adj->content))->name);
 	while (get_next_line(0, &line) > 0)
 	{
-		file = ft_lsttower(file, line);
-		if (!str_iscomment(line) && !str_iscommand(line, 1))
+		if (str_iscommand(line, 0))
+			return ;
+		if (!str_iscomment(line))
 		{
-			get_room_links(line, room);
+			if (!get_room_links(line, room))
+				return ;
 		}
+		file = ft_lsttower(file, line);
 	}
 	ft_putendl("FIN: find_connections");
 }
