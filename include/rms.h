@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 19:55:35 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/01 21:28:13 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef struct		s_dome
 	int				c;
 }					t_dome;
 
+typedef struct		s_ant
+{
+	int				id;
+	t_dome			*room;
+//	t_dome			*
+	int				moved;
+}					t_ant;
+
 t_list				**ft_lsttower(t_list **head, char *str);
 int					find_antsnbr(t_list **file);
 int					str_iscomment(char *str);
@@ -61,4 +69,5 @@ int					ft_is_solvable(t_dome *room);
 void				print_rooms(t_dome *room);
 void				print_file(t_list *file);
 void				print_room_links(char *name, t_dome *room);
+void				print_ant_status(t_list *ant);
 #endif

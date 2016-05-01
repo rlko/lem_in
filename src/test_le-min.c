@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 14:10:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 19:27:22 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/01 21:29:46 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,16 @@ void			print_file(t_list *file)
 		file = file->next;
 	}
 	ft_putendl("########### FICHER ###########");
+}
+
+void			print_ant_status(t_list *ant)
+{
+	while (ant)
+	{
+		ft_putstr("Ant no #");
+		ft_putnbr(((t_ant *)ant->content)->id);
+		ft_putstr(" @room: ");
+		ft_putendl(((t_ant *)ant->content)->room->name);
+		ant = ant->next;
+	}
 }
