@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 14:16:06 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/01 19:55:35 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_dome
 	char			*y;
 	t_list			*adj;
 	int				v;
+	int				c;
 }					t_dome;
 
 t_list				**ft_lsttower(t_list **head, char *str);
@@ -50,6 +51,8 @@ t_dome				*find_rooms(t_list **file);
 void				fill_connections(t_list *lst, t_dome **head);
 int					get_room_links(char *line, t_dome **room);
 void				find_connections(t_list **file, t_dome **room);
+
+int					ft_is_solvable(t_dome *room);
 
 /*
 ** Tests functions:

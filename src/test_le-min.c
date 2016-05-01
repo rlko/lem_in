@@ -6,12 +6,11 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 14:10:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 14:49:12 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/01 19:27:22 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
-
 
 void				print_room_links(char *name, t_dome *room)
 {
@@ -51,7 +50,7 @@ void				print_rooms(t_dome *room)
 		ft_putstr(" y: ");
 		ft_putstr(room->y);
 		ft_putstr(" visited: ");
-		ft_putnbr(room->v);
+		ft_putnbr(room->c);
 //		ft_putstr(room->v ? "yes" : "no");
 		ft_putchar('\n');
 		room = room->next;

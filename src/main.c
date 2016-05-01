@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 15:36:05 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/01 20:30:44 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,12 @@ t_list		**ft_lsttower(t_list **head, char *str)
 	return (head);
 }
 
-int			ft_pathfinder(t_dome *alst)
+void		shit_just_got_serious(t_list **paths, t_dome *rooms)
 {
-	t_list *side;
-
-	(alst)->v = 1;
-	if ((alst)->type == EDROOM)
-		return (1);
-	side = (alst)->adj;
-	while (side != NULL)
-	{
-		if (((t_dome *)(side->content))->v == 0 && \
-				ft_pathfinder(((t_dome *)(side->content))))
-				return (1);
-		else
-			side = side->next;
-	}
-	(alst)->v = -1;
-	return (0);
-}
-
-int			find_possibilities(t_list **paths, t_dome *rooms)
-{
-	t_dome *start;
-
-	start = rooms;
 	(void)paths;
-	while (start != NULL)
-	{
-		if (start->type == STROOM)
-			break ;
-		start = start->next;
-	}
-	return (ft_pathfinder(start));
+	(void)rooms;
+	// [insert smart implementation]	
 }
-
 
 int			main(void)
 {
@@ -78,18 +49,10 @@ int			main(void)
 		return (ft_error("ERROR"));
 	rooms = find_rooms(&file);
 	find_connections(&file, &rooms);
-	if (!find_possibilities(&paths, rooms))
+	if (!ft_is_solvable(rooms))
 		return (ft_error("ERROR"));
+	shit_just_got_serious(&paths, rooms);
 // DEBUT	TESTS
-	t_list  *lst;
-
-	lst = rooms->adj;
-	while (lst)
-	{
-		ft_putendl((((t_dome *)(lst->content))->name));
-		ft_putnbr((((t_dome *)(lst->content))->v));
-		lst = lst->next;
-}
 //	print_room_links("7", rooms);
 	ft_putendl("\nParsing done:");
 	print_rooms(rooms);
