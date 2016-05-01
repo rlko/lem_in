@@ -35,3 +35,6 @@
 # Vim files
 .*.swp
 .*.swo
+
+# Bin
+lem-in
