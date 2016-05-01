@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/28 19:15:01 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/01 14:17:33 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				mk_rooms(t_dome **head, char **prev, char *line)
 		ft_exit_error("mk_rooms: room: malloc");
 	room->adj = NULL;
 	room->next = NULL;
+	room->v = 0;
 	assign_type(&room, *prev);
 	assign_room(lst, &room);
 	if (*prev)

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:28:20 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/01 14:16:06 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_dome
 	char			*x;
 	char			*y;
 	t_list			*adj;
+	int				v;
 }					t_dome;
 
 t_list				**ft_lsttower(t_list **head, char *str);

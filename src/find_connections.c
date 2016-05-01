@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:10:22 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:21:42 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/01 15:33:05 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		find_connections(t_list **file, t_dome **room)
 	char	*line;
 
 	if (!(line = get_last_line(*file)))
-		ft_exit_error("ERROR: wut");
+		ft_exit_error("ERROR: whut the fuck happened");
 	if (!get_room_links(line, room))
 	{
 		free_the_intruder(file);

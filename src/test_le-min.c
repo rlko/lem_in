@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 14:10:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 14:26:54 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/01 14:49:12 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void				print_rooms(t_dome *room)
 		ft_putstr(room->x);
 		ft_putstr(" y: ");
 		ft_putstr(room->y);
+		ft_putstr(" visited: ");
+		ft_putnbr(room->v);
+//		ft_putstr(room->v ? "yes" : "no");
 		ft_putchar('\n');
 		room = room->next;
 	}

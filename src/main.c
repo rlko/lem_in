@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:36:26 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/01 15:36:05 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,44 @@ t_list		**ft_lsttower(t_list **head, char *str)
 	return (head);
 }
 
-int			find_possibilities()
+int			ft_pathfinder(t_dome *alst)
+{
+	t_list *side;
+
+	(alst)->v = 1;
+	if ((alst)->type == EDROOM)
+		return (1);
+	side = (alst)->adj;
+	while (side != NULL)
+	{
+		if (((t_dome *)(side->content))->v == 0 && \
+				ft_pathfinder(((t_dome *)(side->content))))
+				return (1);
+		else
+			side = side->next;
+	}
+	(alst)->v = -1;
+	return (0);
+}
+
+int			find_possibilities(t_list **paths, t_dome *rooms)
+{
+	t_dome *start;
+
+	start = rooms;
+	(void)paths;
+	while (start != NULL)
+	{
+		if (start->type == STROOM)
+			break ;
+		start = start->next;
+	}
+	return (ft_pathfinder(start));
+}
 
 
 int			main(void)
 {
-	ft_putendl("DEBUT: main");
 	int		anb;
 	t_list	*file;
 	t_dome	*rooms;
@@ -46,14 +78,22 @@ int			main(void)
 		return (ft_error("ERROR"));
 	rooms = find_rooms(&file);
 	find_connections(&file, &rooms);
-	if (!find_possibilities(&rooms))
+	if (!find_possibilities(&paths, rooms))
 		return (ft_error("ERROR"));
 // DEBUT	TESTS
-	print_room_links("7", rooms);
+	t_list  *lst;
+
+	lst = rooms->adj;
+	while (lst)
+	{
+		ft_putendl((((t_dome *)(lst->content))->name));
+		ft_putnbr((((t_dome *)(lst->content))->v));
+		lst = lst->next;
+}
+//	print_room_links("7", rooms);
 	ft_putendl("\nParsing done:");
 	print_rooms(rooms);
 	print_file(file);
 // FIN		TESTS
-	ft_putendl("FIN: main");
 	return (0);
 }
