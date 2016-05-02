@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/02 19:01:41 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/02 20:42:54 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ t_list		*instantiate_ants(int n, t_dome *room)
 	}
 	return (lst_ant);
 }
+
 int			depth_able(void *prev, void *curr)
 {
 	if (curr != prev || ((t_dome *)curr)->type != EDROOM)
 		return (1);
 	return (0);
 }
+
 void		subarashiki_kono_sekai(t_dome *room, t_dome *current)
 {
 	static void	*prev = NULL;
