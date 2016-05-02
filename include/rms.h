@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 21:28:13 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/02 15:47:20 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ typedef struct		s_dome
 	t_list			*adj;
 	int				v;
 	int				c;
+	int				depth;
 }					t_dome;
 
 typedef struct		s_ant
 {
 	int				id;
 	t_dome			*room;
+	t_dome			*end;
 //	t_dome			*
 	int				moved;
 }					t_ant;

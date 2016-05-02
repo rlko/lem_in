@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_solvable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/01 19:52:54 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/01 19:55:51 by akarin           ###   ########.fr       */
+/*   Created: 2016/05/02 13:50:27 by rliou-ke          #+#    #+#             */
+/*   Updated: 2016/05/02 13:52:07 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
 
-int			ft_tasukete(t_dome *aniki)
+static int	ft_tasukete(t_dome *aniki)
 {
-	t_list *sempai;
+	t_list	*sempai;
 
 	aniki->v = 1;
 	if (aniki->type == EDROOM)
@@ -26,7 +26,7 @@ int			ft_tasukete(t_dome *aniki)
 				ft_tasukete(((t_dome *)sempai->content)))
 		{
 			aniki->c = 1;
-				return (1);
+			return (1);
 		}
 		else
 			sempai = sempai->next;
@@ -35,8 +35,7 @@ int			ft_tasukete(t_dome *aniki)
 	return (0);
 }
 
-
-void		reinit(t_dome *rooms)
+static void	reinit(t_dome *rooms)
 {
 	while (rooms)
 	{
@@ -48,7 +47,7 @@ void		reinit(t_dome *rooms)
 
 int			ft_is_solvable(t_dome *room)
 {
-	t_dome *start;
+	t_dome	*start;
 
 	start = room;
 	while (start != NULL)

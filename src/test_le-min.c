@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 14:10:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 21:29:46 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/02 16:30:15 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void				print_rooms(t_dome *room)
 		ft_putstr(" y: ");
 		ft_putstr(room->y);
 		ft_putstr(" visited: ");
-		ft_putnbr(room->c);
+		ft_putnbr(room->v);
+		ft_putstr(" depth: ");
+		ft_putnbr(room->depth);
 //		ft_putstr(room->v ? "yes" : "no");
 		ft_putchar('\n');
 		room = room->next;

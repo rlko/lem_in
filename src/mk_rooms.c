@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 18:53:05 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/02 18:52:55 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int				mk_rooms(t_dome **head, char **prev, char *line)
 	room->v = 0;
 	room->c = 0;
 	assign_type(&room, *prev);
+	room->depth = room->type == EDROOM ? 0 : -1;
 	assign_room(lst, &room);
 	if (*prev)
 		*prev = NULL;
