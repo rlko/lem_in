@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/02 20:42:54 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/03 17:55:28 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void		subarashiki_kono_sekai(t_dome *room, t_dome *current)
 	static void	*prev = NULL;
 	t_list		*side;
 
-	if (room == current)
-		return ;
 	side = current->adj;
 	while (side != NULL)
 	{
@@ -102,12 +100,13 @@ void		subarashiki_kono_sekai(t_dome *room, t_dome *current)
 	side = current->adj;
 	while (side != NULL)
 	{
-		if (((t_dome *)side->content)->v == 0)
+		if (current->depth < ((t_dome *)side->content)->depth)
 		{
-			((t_dome *)side->content)->v = 1;
 			prev = current;
 			subarashiki_kono_sekai(room, ((t_dome *)side->content));
 		}
+		else
+			break ;
 		side = side->next;
 	}
 }
@@ -121,7 +120,7 @@ void		destruct_this_world(t_list *file, t_list *ants, t_dome *rooms)
 	{
 		tmp = file;
 		file = file->next;
-		free(tmp->content);
+		ft_strdel((char **)&tmp->content);
 		free(tmp);
 	}
 	while (ants)
@@ -140,12 +139,13 @@ void		destruct_this_world(t_list *file, t_list *ants, t_dome *rooms)
 			del->adj = del->adj->next;
 			free(tmp);
 		}
-		free(del->name);
-		free(del->x);
-		free(del->y);
+		ft_strdel(&del->name);
+		ft_strdel(&del->x);
+		ft_strdel(&del->y);
 		free(del);
 	}
 }
+
 /*
 void		shit_just_got_serious(t_list **ants)
 {
@@ -159,6 +159,7 @@ void		shit_just_got_serious(t_list **ants)
 //	shit_just_got_serious(ants);
 }
 */
+
 int			main(void)
 {
 	int		anb;
