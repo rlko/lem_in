@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 21:20:11 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 22:20:17 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		subarashiki_kono_sekai(t_dome *current)
 		side = side->next;
 	}
 }
-
 
 t_dome		*get_next_room(t_dome *current, t_dome *prev)
 {
@@ -126,46 +125,44 @@ int			all_done(t_list *ants)
 	return (1);
 }
 
-void		update_ant_data(t_ant **ant, t_dome *dest)
+void		update_ant_data(t_ant *ant, t_dome *dest)
 {
-	(*ant)->prev = (*ant)->room;
-	(*ant)->room->occupied = 0;
-	(*ant)->room = dest;
-	if ((*ant)->room->type != EDROOM)
+	ant->prev = ant->room;
+	ant->room->occupied = 0;
+	ant->room = dest;
+	if (ant->room->type != EDROOM)
 		dest->occupied = 1;
-	(*ant)->played = 1;
+	ant->played = 1;
+}
+
+void		little_ant_gonna_be_smart(t_list *lsta, t_dome *head, t_dome *end)
+{
+	t_ant	*ant;
+	t_dome	*dest;
+
+	while (lsta != NULL)
+	{
+		ant = (t_ant *)lsta->content;
+		subarashiki_kono_sekai(end);
+		if ((dest = get_next_room(ant->room, ant->prev)))
+		{
+			update_ant_data(ant, dest);
+			reinit_depth(head);
+		}
+		lsta = lsta->next;
+	}
 }
 
 void		shit_just_got_serious(t_list *ants, t_dome *head)
 {
-	t_list	*tmp;
 	t_dome	*end;
-	t_dome	*dest;
-	t_ant	*ant;
 	int		count;
 
 	count = 0;
 	end = get_room(head, EDROOM);
 	while (42)
 	{
-		tmp = ants;
-		while (tmp != NULL)
-		{
-			ant = tmp->content;
-			subarashiki_kono_sekai(end);
-			if ((dest = get_next_room(ant->room, ant->prev)))
-			{/*
-				ant->prev = ant->room;
-				ant->room->occupied = 0;
-				ant->room = dest;
-				if (ant->room->type != EDROOM)
-					dest->occupied = 1;
-				ant->played = 1;*/
-				update_ant_data(&ant, dest);
-				reinit_depth(head);
-			}
-			tmp = tmp->next;
-		}
+		little_ant_gonna_be_smart(ants, head, end);
 		print_turn(ants);
 		if (all_done(ants))
 			break ; 
