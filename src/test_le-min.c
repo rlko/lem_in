@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 14:10:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/02 16:30:15 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 20:36:09 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void				print_room_links(char *name, t_dome *room)
 	{
 		if (ft_strequ(room->name, name))
 		{
-			ft_putstr(name);
-			ft_pustr("'s connections: ");
+			ft_pustr(" Linked to: ");
 			lst = room->adj;
 			while (lst)
 			{
@@ -32,7 +31,6 @@ void				print_room_links(char *name, t_dome *room)
 		}
 		room = room->next;
 	}
-	ft_putchar('\n');
 }
 
 void				print_rooms(t_dome *room)
@@ -49,11 +47,11 @@ void				print_rooms(t_dome *room)
 		ft_putstr(room->x);
 		ft_putstr(" y: ");
 		ft_putstr(room->y);
-		ft_putstr(" visited: ");
-		ft_putnbr(room->v);
 		ft_putstr(" depth: ");
 		ft_putnbr(room->depth);
-//		ft_putstr(room->v ? "yes" : "no");
+		ft_putstr(" occupied: ");
+		ft_putstr(room->occupied ? "yes" : "no");
+		print_room_links(room->name, room);
 		ft_putchar('\n');
 		room = room->next;
 	}
@@ -63,13 +61,12 @@ void				print_rooms(t_dome *room)
 
 void			print_file(t_list *file)
 {
-	ft_putendl("########### FICHER ###########");
 	while (file)
 	{
 		ft_putendl(file->content);
 		file = file->next;
 	}
-	ft_putendl("########### FICHER ###########");
+	ft_putchar('\n');
 }
 
 void			print_ant_status(t_list *ant)

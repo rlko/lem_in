@@ -4,3 +4,6 @@
 [submodule "lem-in_generator"]
 	path = lem-in_generator
 	url = https://github.com/cmehay/lem-in_generator.git
+[submodule "generator"]
+	path = generator
+	url = https://github.com/cmehay/lem-in_generator.git

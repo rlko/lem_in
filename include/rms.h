@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 12:24:04 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 21:22:46 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct		s_dome
 	char			*x;
 	char			*y;
 	t_list			*adj;
-	int				v;
-	int				c;
 	int				depth;
 	int				occupied;
 }					t_dome;
@@ -44,12 +42,13 @@ typedef struct		s_ant
 {
 	int				id;
 	t_dome			*room;
-	t_dome			*end;
-//	t_dome			*
-	int				moved;
+	t_dome			*prev;
+	int				played;
 }					t_ant;
 
 t_list				**ft_lsttower(t_list **head, char *str);
+t_dome				*get_room(t_dome *lst, enum e_type type);
+
 int					find_antsnbr(t_list **file);
 int					str_iscomment(char *str);
 int					str_iscommand(char *str, int strict);
@@ -65,12 +64,16 @@ void				find_connections(t_list **file, t_dome **room);
 
 int					ft_is_solvable(t_dome *room);
 
+t_list				*instantiate_ants(int n, t_dome *room);
+
+void				print_turn(t_list *ants);
+void				print_file_and_bye(t_list **file);
+void				print_count_turn(int count, int opt);
 /*
 ** Tests functions:
 */
 
 void				print_rooms(t_dome *room);
-void				print_file(t_list *file);
 void				print_room_links(char *name, t_dome *room);
 void				print_ant_status(t_list *ant);
 #endif

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:09:06 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/30 19:21:50 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 20:31:58 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,26 @@ static int	link_isvalid(t_list *lst, t_dome *room)
 	return (1);
 }
 
+static int	count_char(char *str, char c)
+{
+	int i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str == c)
+			++i;
+		++str;
+	}
+	return (i);
+}
+
 int			get_room_links(char *line, t_dome **room)
 {
 	t_list	*lsplit;
 
+	if (count_char(line, '-') != 1)
+		return (0);
 	lsplit = ft_lstsplit(line, '-');
 	if (ft_lstlen(lsplit) != 2)
 		return (0);

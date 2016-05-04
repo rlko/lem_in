@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:55:21 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/04/28 14:08:44 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 16:55:42 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ t_dome			*find_rooms(t_list **file)
 		if (!str_iscomment(line) && !str_iscommand(line, 1))
 		{
 			if (!(ret[2] = mk_rooms(&rooms, &prev, line)))
-				return (rooms);
+					return (rooms);
 		}
 		if ((ret[1] = is_unique(line)) > 1)
 			ft_exit_error("ERROR");
 		free(line);
 	}
-	return (rooms);
+	ft_exit_error("ERROR");
+	return (NULL);
 }

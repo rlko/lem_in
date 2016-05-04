@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 13:10:48 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 21:20:11 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,42 +33,10 @@ t_dome		*get_room(t_dome *lst, enum e_type type)
 	while (lst != NULL)
 	{
 		if (lst->type == type)
-			break ;
+			return (lst);
 		lst = lst->next;
 	}
-	return (lst);
-}
-
-t_ant		*init_ant(int n, t_dome *start)
-{
-	t_ant	*ant;
-
-	if (!(ant = malloc(sizeof(*ant))))
-		ft_exit_error("init_ant: ant: malloc");
-	ant->id = n;
-	ant->room = start;
-	ant->moved = 0;
-	return (ant);
-}
-
-t_list		*instantiate_ants(int n, t_dome *room)
-{
-	t_ant	*ant;
-	t_list	*lst_ant;
-	t_list	*new;
-
-	lst_ant = NULL;
-	room = get_room(room, STROOM);
-	while (n)
-	{
-		ant = init_ant(n, room);
-		if (!(new = malloc(sizeof(*new))))
-			ft_exit_error("instantiate_ants: new: malloc");
-		new->content = ant;
-		ft_lstadd(&lst_ant, new);
-		n--;
-	}
-	return (lst_ant);
+	return (NULL);
 }
 
 void		subarashiki_kono_sekai(t_dome *current)
@@ -91,18 +59,128 @@ void		subarashiki_kono_sekai(t_dome *current)
 	}
 }
 
-void		destruct_this_world(t_list *file, t_list *ants, t_dome *rooms)
+
+t_dome		*get_next_room(t_dome *current, t_dome *prev)
+{
+	t_list *link;
+	t_dome	*room;
+	t_dome	*dest;
+
+	dest = NULL;
+	link = current->adj;
+	while (link)
+	{
+		room = link->content;
+		if (!dest && room->depth != -1 && room != prev)
+			dest = room;
+		else if (dest)
+		{
+			if (dest->depth > room->depth && room->depth != -1 && room != prev)
+			dest = room;
+		}
+		link = link->next;
+	}
+	if (dest)
+	{
+		if (dest->depth < current->depth)
+			return (dest);
+	}
+	return (NULL);
+}
+
+void		reset_turn(t_list *ants)
+{
+	t_ant	*ant;
+
+	while (ants)
+	{
+		ant = (t_ant *)ants->content;
+		ant->played = 0;
+		ants = ants->next;
+	}
+}
+
+static void	reinit_depth(t_dome *rooms)
+{
+	while (rooms)
+	{
+		if (rooms->occupied)
+			rooms->depth = INTMAX;
+		else
+			rooms->depth = rooms->type == EDROOM ? 0 : -1;
+		rooms = rooms->next;
+	}
+}
+
+int			all_done(t_list *ants)
+{
+	t_ant	*ant;
+
+	while (ants)
+	{
+		ant = (t_ant *)ants->content;
+		if (ant->room->type != EDROOM)
+			return (0);
+		ants = ants->next;
+	}
+	return (1);
+}
+
+void		update_ant_data(t_ant **ant, t_dome *dest)
+{
+	(*ant)->prev = (*ant)->room;
+	(*ant)->room->occupied = 0;
+	(*ant)->room = dest;
+	if ((*ant)->room->type != EDROOM)
+		dest->occupied = 1;
+	(*ant)->played = 1;
+}
+
+void		shit_just_got_serious(t_list *ants, t_dome *head)
+{
+	t_list	*tmp;
+	t_dome	*end;
+	t_dome	*dest;
+	t_ant	*ant;
+	int		count;
+
+	count = 0;
+	end = get_room(head, EDROOM);
+	while (42)
+	{
+		tmp = ants;
+		while (tmp != NULL)
+		{
+			ant = tmp->content;
+			subarashiki_kono_sekai(end);
+			if ((dest = get_next_room(ant->room, ant->prev)))
+			{/*
+				ant->prev = ant->room;
+				ant->room->occupied = 0;
+				ant->room = dest;
+				if (ant->room->type != EDROOM)
+					dest->occupied = 1;
+				ant->played = 1;*/
+				update_ant_data(&ant, dest);
+				reinit_depth(head);
+			}
+			tmp = tmp->next;
+		}
+		print_turn(ants);
+		if (all_done(ants))
+			break ; 
+		reset_turn(ants);
+		reinit_depth(head);
+		++count;
+	}
+	print_count_turn(count, 1);
+}
+
+void		the_world_ends_without_you(t_list *ants, t_dome *rooms)
 {
 	t_list	*tmp;
 	t_dome	*del;
 
-	while (file)
-	{
-		tmp = file;
-		file = file->next;
-		ft_strdel((char **)&tmp->content);
-		free(tmp);
-	}
 	while (ants)
 	{
 		tmp = ants;
@@ -126,58 +204,6 @@ void		destruct_this_world(t_list *file, t_list *ants, t_dome *rooms)
 	}
 }
 
-t_dome		*get_next_room(t_dome *current)
-{
-	t_dome *next;
-	t_list *link;
-	t_dome	*node;
-
-	link = current->adj;
-	while (link)
-	{
-		node = link->content;
-		if (node->depth < current->depth)
-			return (node);
-		link = link->next;
-	}
-	return (NULL);
-}
-
-static void	reinit_depth(t_dome *rooms)
-{
-	while (rooms)
-	{
-		rooms->depth = 0;
-		rooms = rooms->next;
-	}
-}
-
-//		if (((t_ant *)ants->content)->room->type == EDROOM)
-void		shit_just_got_serious(t_list *ants, t_dome *head)
-{
-	t_dome	*end;
-	t_dome	*dest;
-	t_ant	*ant;
-
-	end = get_room(head, EDROOM);
-	while (ants != NULL)
-	{
-		ant = ants->content;
-		subarashiki_kono_sekai(end);
-		if ((dest = get_next_room(ant->room)))
-		{
-			ant->room->occupied = 1;
-			ant->moved = 1;
-			reinit_end(head);
-			if (ant->room->type == EDROOM)
-				///;
-		}
-		ants = ants->next;
-	}
-	shit_just_got_serious(ants);
-}
-
-
 int			main(void)
 {
 	int		anb;
@@ -192,16 +218,9 @@ int			main(void)
 	find_connections(&file, &rooms);
 	if (!ft_is_solvable(rooms))
 		return (ft_error("ERROR"));
+	print_file_and_bye(&file);
 	ants = instantiate_ants(anb, rooms);	
-	subarashiki_kono_sekai(get_room(rooms, EDROOM));
-//	shit_just_got_serious(ants, rooms);
-//	print_ant_status(ants);
-// DEBUT	TESTS
-//	print_room_links("7", rooms);
-	ft_putendl("\nParsing done:");
-	print_rooms(rooms);
-	print_file(file);
-// FIN		TESTS
-	destruct_this_world(file, ants, rooms);
+	shit_just_got_serious(ants, rooms);
+	the_world_ends_without_you(ants, rooms);
 	return (0);
 }

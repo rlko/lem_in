@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:03:57 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/01 15:31:19 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/04 19:01:54 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	add_to(char *adj_room, t_dome **node, t_dome *lst)
 				if (!(connection = malloc(sizeof(*connection))))
 					ft_exit_error("add_to: conneciton: malloc");
 				connection->content = lst;
-//				connection = ft_lstnew(lst, sizeof(t_dome));
 				ft_lstappend(&(*node)->adj, connection);
 			}
 			return ;

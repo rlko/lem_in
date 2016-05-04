@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 12:24:55 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 16:37:53 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,27 @@ static int		data_are_unique(t_dome *head, t_list *lst)
 	return (1);
 }
 
+static int		count_char(char *str, char c)
+{
+	int i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str == c)
+			++i;
+		++str;
+	}
+	return (i);
+}
+
 static int		split_parse(char *line, t_list **lst, t_dome *head)
 {
 	int			nb_node;
 	char		*str;
 
+	if (count_char(line, ' ') != 2)
+		return (0);
 	if (!(*lst = ft_lstsplit(line, ' ')))
 		ft_exit_error("mk_rooms: lst: ft_lstsplit");
 	nb_node = ft_lstlen(*lst);
@@ -96,8 +112,6 @@ int				mk_rooms(t_dome **head, char **prev, char *line)
 		ft_exit_error("mk_rooms: room: malloc");
 	room->adj = NULL;
 	room->next = NULL;
-	room->v = 0;
-	room->c = 0;
 	room->occupied = 0;
 	assign_type(&room, *prev);
 	room->depth = room->type == EDROOM ? 0 : -1;

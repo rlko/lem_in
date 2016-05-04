@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:10:22 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/02 13:51:04 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 20:48:26 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,30 @@ static void	free_the_intruder(t_list **file)
 	free(tmp);
 }
 
+static int	check_command(t_list *file)
+{
+	int	start;
+	int	end;
+
+	start = 0;
+	end = 0;
+	while (file)
+	{
+		if (ft_strequ(file->content, "##start"))
+			start = 1;
+		else if (ft_strequ(file->content, "##end"))
+			end = 1;
+		file = file->next;
+	}
+	return (start && end);
+}
+
 void		find_connections(t_list **file, t_dome **room)
 {
 	char	*line;
 
+	if (!check_command(*file))
+		ft_exit_error("ERROR");
 	if (!(line = get_last_line(*file)))
 		ft_exit_error("ERROR: whut the fuck happened");
 	if (!get_room_links(line, room))
@@ -55,7 +75,7 @@ void		find_connections(t_list **file, t_dome **room)
 	{
 		if (str_iscommand(line, 0))
 			return ;
-		if (!str_iscomment(line))
+		if (!(line[0] == '#'))
 		{
 			if (!get_room_links(line, room))
 				return ;
