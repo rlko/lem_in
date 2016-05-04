@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/03 17:55:28 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 13:10:48 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_dome		*get_room(t_dome *lst, enum e_type type)
 	return (lst);
 }
 
-t_ant		*init_ant(int n, t_dome *start, t_dome *end)
+t_ant		*init_ant(int n, t_dome *start)
 {
 	t_ant	*ant;
 
@@ -47,7 +47,6 @@ t_ant		*init_ant(int n, t_dome *start, t_dome *end)
 		ft_exit_error("init_ant: ant: malloc");
 	ant->id = n;
 	ant->room = start;
-	ant->end = end;
 	ant->moved = 0;
 	return (ant);
 }
@@ -57,14 +56,12 @@ t_list		*instantiate_ants(int n, t_dome *room)
 	t_ant	*ant;
 	t_list	*lst_ant;
 	t_list	*new;
-	t_dome	*end;
 
 	lst_ant = NULL;
-	end = get_room(room, EDROOM);
 	room = get_room(room, STROOM);
 	while (n)
 	{
-		ant = init_ant(n, room, end);
+		ant = init_ant(n, room);
 		if (!(new = malloc(sizeof(*new))))
 			ft_exit_error("instantiate_ants: new: malloc");
 		new->content = ant;
@@ -74,14 +71,7 @@ t_list		*instantiate_ants(int n, t_dome *room)
 	return (lst_ant);
 }
 
-int			depth_able(void *prev, void *curr)
-{
-	if (curr != prev || ((t_dome *)curr)->type != EDROOM)
-		return (1);
-	return (0);
-}
-
-void		subarashiki_kono_sekai(t_dome *room, t_dome *current)
+void		subarashiki_kono_sekai(t_dome *current)
 {
 	static void	*prev = NULL;
 	t_list		*side;
@@ -89,24 +79,14 @@ void		subarashiki_kono_sekai(t_dome *room, t_dome *current)
 	side = current->adj;
 	while (side != NULL)
 	{
-//		(void)prev;
-		if (depth_able(prev, side->content))
-		{
-			if ((((t_dome *)side->content)->depth < current->depth + 1) || ((t_dome *)side->content)->depth == -1)
-				((t_dome *)side->content)->depth = current->depth + 1;
-		}
-		side = side->next;
-	}
-	side = current->adj;
-	while (side != NULL)
-	{
-		if (current->depth < ((t_dome *)side->content)->depth)
+		if ((current->depth < ((t_dome *)side->content)->depth\
+				   	|| ((t_dome *)side->content)->depth == -1) \
+				&& ((t_dome *)side->content)->occupied == 0)
 		{
 			prev = current;
-			subarashiki_kono_sekai(room, ((t_dome *)side->content));
+			((t_dome *)side->content)->depth = current->depth + 1;
+			subarashiki_kono_sekai(((t_dome *)side->content));
 		}
-		else
-			break ;
 		side = side->next;
 	}
 }
@@ -146,19 +126,57 @@ void		destruct_this_world(t_list *file, t_list *ants, t_dome *rooms)
 	}
 }
 
-/*
-void		shit_just_got_serious(t_list **ants)
+t_dome		*get_next_room(t_dome *current)
 {
-	if (((t_ant *)ants->content)->room->type == EDROOM)
-		return ;
-	subarashiki_kono_sekai(((t_ant *)ants->content)->room, ((t_ant *)ants->content)->end);
-//	while (ants != NULL)
-//	{
-//		ants = ants->next;
-//	}
-//	shit_just_got_serious(ants);
+	t_dome *next;
+	t_list *link;
+	t_dome	*node;
+
+	link = current->adj;
+	while (link)
+	{
+		node = link->content;
+		if (node->depth < current->depth)
+			return (node);
+		link = link->next;
+	}
+	return (NULL);
 }
-*/
+
+static void	reinit_depth(t_dome *rooms)
+{
+	while (rooms)
+	{
+		rooms->depth = 0;
+		rooms = rooms->next;
+	}
+}
+
+//		if (((t_ant *)ants->content)->room->type == EDROOM)
+void		shit_just_got_serious(t_list *ants, t_dome *head)
+{
+	t_dome	*end;
+	t_dome	*dest;
+	t_ant	*ant;
+
+	end = get_room(head, EDROOM);
+	while (ants != NULL)
+	{
+		ant = ants->content;
+		subarashiki_kono_sekai(end);
+		if ((dest = get_next_room(ant->room)))
+		{
+			ant->room->occupied = 1;
+			ant->moved = 1;
+			reinit_end(head);
+			if (ant->room->type == EDROOM)
+				///;
+		}
+		ants = ants->next;
+	}
+	shit_just_got_serious(ants);
+}
+
 
 int			main(void)
 {
@@ -175,8 +193,8 @@ int			main(void)
 	if (!ft_is_solvable(rooms))
 		return (ft_error("ERROR"));
 	ants = instantiate_ants(anb, rooms);	
-	subarashiki_kono_sekai(((t_ant *)ants->content)->room, ((t_ant *)ants->content)->end);
-//	shit_just_got_serious(ants);
+	subarashiki_kono_sekai(get_room(rooms, EDROOM));
+//	shit_just_got_serious(ants, rooms);
 //	print_ant_status(ants);
 // DEBUT	TESTS
 //	print_room_links("7", rooms);

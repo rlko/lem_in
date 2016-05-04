@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/02 15:47:20 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:24:04 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_dome
 	int				v;
 	int				c;
 	int				depth;
+	int				occupied;
 }					t_dome;
 
 typedef struct		s_ant
