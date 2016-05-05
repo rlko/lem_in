@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 22:20:17 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/04 23:03:34 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void		shit_just_got_serious(t_list *ants, t_dome *head)
 	t_dome	*end;
 	int		count;
 
-	count = 0;
+	count = 1;
 	end = get_room(head, EDROOM);
 	while (42)
 	{
@@ -170,7 +170,7 @@ void		shit_just_got_serious(t_list *ants, t_dome *head)
 		reinit_depth(head);
 		++count;
 	}
-	print_count_turn(count, 1);
+	print_count_turn(count, 0);
 }
 
 void		the_world_ends_without_you(t_list *ants, t_dome *rooms)
