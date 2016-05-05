@@ -6,11 +6,33 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:32:01 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 17:32:03 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:43:50 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
+
+void		print_pizza(t_dome *head, int nbants, int opt)
+{
+	if (!opt)
+		return ;
+	while (head)
+	{
+		if (head->pizza >= 0)
+		{
+			ft_putstr("Amount of ants bypassing @So Gusto: ");
+			ft_putnbr(head->pizza);
+			ft_putchar('\n');
+			if (head->pizza != nbants)
+			{
+				ft_putnbr(nbants - head->pizza);
+				ft_putstr(" ants are still starving 😣");
+			}
+			return ;
+		}
+		head = head->next;
+	}
+}
 
 static int	all_done(t_list *ants)
 {
@@ -38,25 +60,26 @@ static void	reset_turn(t_list *ants)
 	}
 }
 
-void		shit_just_got_serious(t_list *ants, t_dome *hd, int *opt)
+void		shit_just_got_serious(t_lm box)
 {
 	t_dome	*end;
 	int		count;
 
 	count = 1;
-	end = get_room(hd, EDROOM);
+	end = get_room(box.rooms, EDROOM);
 	while (42)
 	{
 //		if (!opt['s'])
-			little_ant_gonna_lift(ants, hd, end);
+			little_ant_gonna_lift(box.ants, box.rooms, end);
 //		else
 //			aint_gonna_give_a_shit(ants, hd, end);
-		print_turn(ants);
-		if (all_done(ants))
+		print_turn(box.ants);
+		if (all_done(box.ants))
 			break ; 
-		reset_turn(ants);
-		reinit_depth(hd);
+		reset_turn(box.ants);
+		reinit_depth(box.rooms);
 		++count;
 	}
-	print_count_turn(count, opt['t']);
+	print_count_turn(count, box.opt['t']);
+	print_pizza(box.rooms, box.nb_ants, box.opt['p']);
 }

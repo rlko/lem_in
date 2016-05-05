@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:28:30 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 16:41:02 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:27:50 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ void	little_ant_gonna_lift(t_list *la, t_dome *hd, t_dome *ed)
 			ant->room->occupied = 0;
 			ant->room = dest;
 			if (ant->room->type != EDROOM)
+			{
+				if (dest->pizza >= 0)
+					++dest->pizza;
 				dest->occupied = 1;
+			}
 			ant->played = 1;
 			reinit_depth(hd);
 		}

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 17:40:12 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:42:15 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			main(int ac, char **av)
 		return (ft_verror("Map invalid/unsolvable", box.opt));
 	print_file_and_bye(&file, box.opt);
 	box.ants = instantiate_ants(box.nb_ants, box.rooms);	
-	shit_just_got_serious(box.ants, box.rooms, box.opt);
+	shit_just_got_serious(box);
 	the_world_ends_without_you(box.ants, box.rooms);
 	return (0);
 }

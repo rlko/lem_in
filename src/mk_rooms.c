@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 17:53:57 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:24:19 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int				mk_rooms(t_dome **head, char **prev, char *line, int *opt)
 	room->adj = NULL;
 	room->next = NULL;
 	room->occupied = 0;
-	room->pizza = opt['p'] ? 0 : -1;
-	assign_type(&room, *prev);
+	assign_type(&room, *prev, opt);
 	room->depth = room->type == EDROOM ? 0 : -1;
+	room->pizza = room->type == PIZZA && opt['p'] ? 0 : -1;
 	assign_room(lst, &room);
 	if (*prev)
 		*prev = NULL;

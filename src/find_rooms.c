@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:55:21 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 17:44:34 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:07:04 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_dome			*find_rooms(t_list **file, int *t_opt)
 			prev = check_command(*file, prev, line, t_opt);
 		if (!str_iscomment(line) && !str_iscommand(line, 1, t_opt['p']))
 		{
-			if (!(ret[2] = mk_rooms(&rooms, &prev, line)))
+			if (!(ret[2] = mk_rooms(&rooms, &prev, line, t_opt)))
 					return (rooms);
 		}
 		if ((ret[1] = is_unique(line, t_opt['p'])) > 1)

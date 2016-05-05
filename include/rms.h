@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 18:04:40 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:40:35 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ enum		e_type
 {
 	RGROOM,
 	STROOM,
-	EDROOM
+	EDROOM,
+	PIZZA
 };
 
 typedef struct		s_dome
@@ -74,7 +75,7 @@ int					str_iscomment(char *str);
 int					str_iscommand(char *str, int strict, int opt);
 
 void				assign_room(t_list *lst, t_dome **room);
-void				assign_type(t_dome **room, char *prev);
+void				assign_type(t_dome **room, char *prev, int *t_opt);
 int					mk_rooms(t_dome **head, char **prev, char *line, int *opt);
 t_dome				*find_rooms(t_list **file, int *t_opt);
 
@@ -87,7 +88,7 @@ int					ft_is_solvable(t_dome *room);
 t_list				*instantiate_ants(int n, t_dome *room);
 void				little_ant_gonna_lift(t_list *la, t_dome *hd, t_dome *ed);
 void				reinit_depth(t_dome *rooms);
-void				shit_just_got_serious(t_list *ants, t_dome *hd, int *opt);
+void				shit_just_got_serious(t_lm box);
 
 void				print_turn(t_list *ants);
 void				print_file_and_bye(t_list **file, int *t_opt);
