@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 21:03:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 17:46:55 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 21:55:10 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,7 @@ void		ft_printline(char *str, int *t_opt)
 		ft_putcolor(C_CYAN, str);
 	else
 	{
-		ft_putstr("\x1b[");
-		ft_putstr("36m");
-		ft_putstr(str);
-		ft_putendl(C_RESET);
-	//	ft_putendl(str);
+		ft_putendl(str);
 	}
 }
 

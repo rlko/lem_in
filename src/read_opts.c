@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 15:02:00 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 19:15:16 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 22:08:45 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		print_err_opt(char c)
 {
 	ft_putstr_fd("len-in: illegal option -- ", 2);
 	ft_putchar(c);
-	ft_putstr_fd("\nusage: ./lem-in [-vtcpb] < [file]\n", 2);
+	ft_putstr_fd("\nusage: ./lem-in [-bcptv] < [file]\n", 2);
 	exit(EXIT_FAILURE);
 }
 

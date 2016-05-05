@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 18:24:19 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 22:02:12 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		data_are_unique(t_dome *head, t_list *lst)
 	int			y;
 	t_dome		*tmp;
 
-	if (!ft_isnumber(lst->next->content) && \
+	if (!ft_isnumber(lst->next->content) || \
 			!ft_isnumber(lst->next->next->content))
 		return (0);
 	x = ft_atoi(lst->next->content);

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 19:56:25 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 22:08:24 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			main(int ac, char **av)
 	if (box.opt['b'] && !box.opt['p'])
 		return (ft_error("Error: option -b cannot work wihout option -p"));
 	if (av[0])
-		return (ft_error("Usage: ./lem-in [-vltc] < [file]"));
+		return (ft_error("Usage: ./lem-in [-bcptv] < [file]"));
 	file = NULL;
 	if (!(box.nb_ants = find_antsnbr(&file, box.opt)))
 		return (ft_verror("Invalid ants number", box.opt));
