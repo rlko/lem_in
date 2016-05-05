@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:10:22 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 16:14:16 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 17:45:08 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		find_connections(t_list **file, t_dome **room, int *t_opt)
 	}
 	while (get_next_line(0, &line) > 0)
 	{
-		if (str_iscommand(line, 0))
+		if (str_iscommand(line, 0, t_opt['p']))
 			return ;
 		if (!(line[0] == '#'))
 		{

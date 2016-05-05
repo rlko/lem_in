@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:17:02 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 16:15:39 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 17:35:55 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,19 @@ int		str_iscomment(char *str)
 	return (str[0] == '#' && str[1] != '#');
 }
 
-int		str_iscommand(char *str, int strict)
+int		str_iscommand(char *str, int strict, int opt)
 {
 	if (!str)
 		ft_exit_error("str_iscommand: str is null");
 	if (strict)
 		return (ft_strncmp(str, "##", 2) == 0);
 	else
-		return (ft_strequ(str, "##start") || ft_strequ(str, "##end"));
+	{
+		if (!opt)
+			return (ft_strequ(str, "##start") || ft_strequ(str, "##end"));
+		return (ft_strequ(str, "##start") || ft_strequ(str, "##end") \
+				|| ft_strequ(str, "##🍕"));
+	}
 }
 
 int		ft_verror(char *verbose, int *t_opt)

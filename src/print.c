@@ -6,11 +6,41 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 21:03:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 21:11:07 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/05 17:46:55 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
+
+static void	ft_putcolor(char *c, char *s)
+{
+	ft_putstr(c);
+	ft_putstr(s);
+	ft_putendl(C_RESET);
+}
+
+void		ft_printline(char *str, int *t_opt)
+{
+	if (!t_opt['c'])
+	{
+		ft_putendl(str);
+		return ;
+	}
+	if (str_iscommand(str, 0, t_opt['p']))
+		ft_putcolor(C_RED, str);
+	else if (str_iscommand(str, 1, t_opt['p']))
+		ft_putcolor("\x1b[32m\x1b[1m", str);
+	else if (str_iscomment(str))
+		ft_putcolor(C_CYAN, str);
+	else
+	{
+		ft_putstr("\x1b[");
+		ft_putstr("36m");
+		ft_putstr(str);
+		ft_putendl(C_RESET);
+	//	ft_putendl(str);
+	}
+}
 
 void		print_turn(t_list *ants)
 {
@@ -33,13 +63,13 @@ void		print_turn(t_list *ants)
 	ft_putchar('\n');
 }
 
-void	print_file_and_bye(t_list **file)
+void	print_file_and_bye(t_list **file, int *t_opt)
 {
 	t_list	*del;
 
 	while (*file)
 	{
-		ft_putendl((*file)->content);
+		ft_printline((*file)->content, t_opt);
 		del = *file;
 		*file = (*file)->next;
 		free(del->content);

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:19:29 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 15:55:35 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 17:39:21 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int		free_zero(char **str)
 	return (0);
 }
 
-int				find_antsnbr(t_list **file)
+int				find_antsnbr(t_list **file, int *t_opt)
 {
 	int			ret;
 	char		*line;
@@ -47,9 +47,9 @@ int				find_antsnbr(t_list **file)
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		file = ft_lsttower(file, line);
-		if (str_iscommand(line, 0))
+		if (str_iscommand(line, 0, t_opt['p']))
 			return (free_zero(&line));
-		if (!str_iscomment(line) && !str_iscommand(line, 1))
+		if (!str_iscomment(line) && !str_iscommand(line, 1, t_opt['p']))
 		{
 			str = line;
 			while (*str)

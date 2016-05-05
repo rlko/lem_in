@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 16:09:09 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 17:53:57 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_dome	*domebuilder(t_dome *head, t_dome *room)
 	return (head);
 }
 
-int				mk_rooms(t_dome **head, char **prev, char *line)
+int				mk_rooms(t_dome **head, char **prev, char *line, int *opt)
 {
 	t_dome		*room;
 	t_list		*lst;
@@ -113,6 +113,7 @@ int				mk_rooms(t_dome **head, char **prev, char *line)
 	room->adj = NULL;
 	room->next = NULL;
 	room->occupied = 0;
+	room->pizza = opt['p'] ? 0 : -1;
 	assign_type(&room, *prev);
 	room->depth = room->type == EDROOM ? 0 : -1;
 	assign_room(lst, &room);

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 16:09:16 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 18:04:40 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include "gnl.h"
 
 # define INTMAX		2147483647
+# define C_RED		"\x1b[31m"
+# define C_GREEN	"\x1b[32m"
+# define C_YELLOW	"\x1b[33m"
+# define C_BLUE		"\x1b[34m"
+# define C_MAGENTA	"\x1b[35m"
+# define C_CYAN		"\x1b[36m"
+# define C_RESET	"\x1b[0m"
 
 enum		e_type
 {
@@ -35,6 +42,7 @@ typedef struct		s_dome
 	char			*y;
 	t_list			*adj;
 	int				depth;
+	int				pizza;
 	int				occupied;
 }					t_dome;
 
@@ -61,13 +69,13 @@ void				ft_exit_verror(char *verbose, int *t_opt);
 t_list				**ft_lsttower(t_list **head, char *str);
 t_dome				*get_room(t_dome *lst, enum e_type type);
 
-int					find_antsnbr(t_list **file);
+int					find_antsnbr(t_list **file, int *t_opt);
 int					str_iscomment(char *str);
-int					str_iscommand(char *str, int strict);
+int					str_iscommand(char *str, int strict, int opt);
 
 void				assign_room(t_list *lst, t_dome **room);
 void				assign_type(t_dome **room, char *prev);
-int					mk_rooms(t_dome **head, char **prev, char *line);
+int					mk_rooms(t_dome **head, char **prev, char *line, int *opt);
 t_dome				*find_rooms(t_list **file, int *t_opt);
 
 void				fill_connections(t_list *lst, t_dome **head);
@@ -77,13 +85,13 @@ void				find_connections(t_list **file, t_dome **room, int *t_opt);
 int					ft_is_solvable(t_dome *room);
 
 t_list				*instantiate_ants(int n, t_dome *room);
+void				little_ant_gonna_lift(t_list *la, t_dome *hd, t_dome *ed);
+void				reinit_depth(t_dome *rooms);
+void				shit_just_got_serious(t_list *ants, t_dome *hd, int *opt);
 
 void				print_turn(t_list *ants);
-void				print_file_and_bye(t_list **file);
+void				print_file_and_bye(t_list **file, int *t_opt);
 void				print_count_turn(int count, int opt);
-/*
-** Tests functions:
-*/
 
 void				print_rooms(t_dome *room);
 void				print_room_links(char *name, t_dome *room);
