@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 19:10:22 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 20:48:26 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/05 16:14:16 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ static int	check_command(t_list *file)
 	return (start && end);
 }
 
-void		find_connections(t_list **file, t_dome **room)
+void		find_connections(t_list **file, t_dome **room, int *t_opt)
 {
 	char	*line;
 
 	if (!check_command(*file))
-		ft_exit_error("ERROR");
+		ft_exit_verror("##start or/and ##end missing", t_opt);
 	if (!(line = get_last_line(*file)))
 		ft_exit_error("ERROR: whut the fuck happened");
 	if (!get_room_links(line, room))

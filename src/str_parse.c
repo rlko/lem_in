@@ -6,11 +6,12 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:17:02 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 20:47:06 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/05 16:15:39 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 int		str_iscomment(char *str)
 {
@@ -25,4 +26,24 @@ int		str_iscommand(char *str, int strict)
 		return (ft_strncmp(str, "##", 2) == 0);
 	else
 		return (ft_strequ(str, "##start") || ft_strequ(str, "##end"));
+}
+
+int		ft_verror(char *verbose, int *t_opt)
+{
+	if (!t_opt['v'])
+		return (ft_error("ERROR"));
+	ft_putstr_fd("ERROR: ", 2);
+	ft_putstr_fd(verbose, 2);
+	ft_putchar_fd('\n', 2);
+	return (1);
+}
+
+void	ft_exit_verror(char *verbose, int *t_opt)
+{
+	if (!t_opt['v'])
+		ft_exit_error("ERROR");
+	ft_putstr_fd("ERROR: ", 2);
+	ft_putstr_fd(verbose, 2);
+	ft_putchar_fd('\n', 2);
+	exit(EXIT_FAILURE);
 }

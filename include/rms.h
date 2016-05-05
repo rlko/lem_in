@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 21:22:46 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/05 16:09:16 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ typedef struct		s_ant
 	int				played;
 }					t_ant;
 
+typedef struct		s_lm
+{
+	int				nb_ants;
+	t_dome			*rooms;
+	t_list			*ants;
+	int				opt[128];	
+}					t_lm;
+
+char				**read_opts(int *t_opt, char **av);
+int					ft_verror(char *verbose, int *t_opt);
+void				ft_exit_verror(char *verbose, int *t_opt);
+
 t_list				**ft_lsttower(t_list **head, char *str);
 t_dome				*get_room(t_dome *lst, enum e_type type);
 
@@ -56,11 +68,11 @@ int					str_iscommand(char *str, int strict);
 void				assign_room(t_list *lst, t_dome **room);
 void				assign_type(t_dome **room, char *prev);
 int					mk_rooms(t_dome **head, char **prev, char *line);
-t_dome				*find_rooms(t_list **file);
+t_dome				*find_rooms(t_list **file, int *t_opt);
 
 void				fill_connections(t_list *lst, t_dome **head);
 int					get_room_links(char *line, t_dome **room);
-void				find_connections(t_list **file, t_dome **room);
+void				find_connections(t_list **file, t_dome **room, int *t_opt);
 
 int					ft_is_solvable(t_dome *room);
 

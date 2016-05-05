@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 23:03:34 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/05 16:20:48 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_dome		*get_room(t_dome *lst, enum e_type type)
 
 void		subarashiki_kono_sekai(t_dome *current)
 {
-	static void	*prev = NULL;
 	t_list		*side;
 
 	side = current->adj;
@@ -51,7 +50,6 @@ void		subarashiki_kono_sekai(t_dome *current)
 				   	|| ((t_dome *)side->content)->depth == -1) \
 				&& ((t_dome *)side->content)->occupied == 0)
 		{
-			prev = current;
 			((t_dome *)side->content)->depth = current->depth + 1;
 			subarashiki_kono_sekai(((t_dome *)side->content));
 		}
@@ -153,7 +151,7 @@ void		little_ant_gonna_be_smart(t_list *lsta, t_dome *head, t_dome *end)
 	}
 }
 
-void		shit_just_got_serious(t_list *ants, t_dome *head)
+void		shit_just_got_serious(t_list *ants, t_dome *head, int *t_opt)
 {
 	t_dome	*end;
 	int		count;
@@ -170,7 +168,7 @@ void		shit_just_got_serious(t_list *ants, t_dome *head)
 		reinit_depth(head);
 		++count;
 	}
-	print_count_turn(count, 0);
+	print_count_turn(count, t_opt['c']);
 }
 
 void		the_world_ends_without_you(t_list *ants, t_dome *rooms)
@@ -201,23 +199,25 @@ void		the_world_ends_without_you(t_list *ants, t_dome *rooms)
 	}
 }
 
-int			main(void)
+int			main(int ac, char **av)
 {
-	int		anb;
+	t_lm	box;
 	t_list	*file;
-	t_dome	*rooms;
-	t_list	*ants;
 
+	(void)ac;
+	av = read_opts(box.opt, av);
+	if (av[0])
+		return (ft_error("Usage: ./lem-in [-vltc] < [file]"));
 	file = NULL;
-	if (!(anb = find_antsnbr(&file)))
-		return (ft_error("ERROR"));
-	rooms = find_rooms(&file);
-	find_connections(&file, &rooms);
-	if (!ft_is_solvable(rooms))
-		return (ft_error("ERROR"));
+	if (!(box.nb_ants = find_antsnbr(&file)))
+		return (ft_verror("Invalid ants number", box.opt));
+	box.rooms = find_rooms(&file, box.opt);
+	find_connections(&file, &box.rooms, box.opt);
+	if (!ft_is_solvable(box.rooms))
+		return (ft_verror("Map invalid/unsolvable", box.opt));
 	print_file_and_bye(&file);
-	ants = instantiate_ants(anb, rooms);	
-	shit_just_got_serious(ants, rooms);
-	the_world_ends_without_you(ants, rooms);
+	box.ants = instantiate_ants(box.nb_ants, box.rooms);	
+	shit_just_got_serious(box.ants, box.rooms, box.opt);
+	the_world_ends_without_you(box.ants, box.rooms);
 	return (0);
 }
