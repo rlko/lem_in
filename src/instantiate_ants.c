@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 21:14:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 21:20:47 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/05 18:52:18 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_ant		*init_ant(int n, t_dome *start)
 	ant->room = start;
 	ant->prev = start;
 	ant->played = 0;
+	ant->ate = 0;
 	return (ant);
 }
 

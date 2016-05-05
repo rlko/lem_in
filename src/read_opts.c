@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 15:02:00 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 17:49:49 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 19:15:16 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		print_err_opt(char c)
 {
 	ft_putstr_fd("len-in: illegal option -- ", 2);
 	ft_putchar(c);
-	ft_putstr_fd("\nusage: ./lem-in [-vltc] < [file]\n", 2);
+	ft_putstr_fd("\nusage: ./lem-in [-vtcpb] < [file]\n", 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -28,7 +28,7 @@ static char		illegal_opt(char *str)
 	while (str[i] != '\0')
 	{
 		if (!(str[i] == 'v' || str[i] == 't' || str[i] == 'c' ||
-				str[i] == 'p'))
+				str[i] == 'p' || str[i] == 'b'))
 			return (str[i]);
 		i++;
 	}
@@ -47,7 +47,7 @@ static int		legit_opt(char *str)
 		while (str[i] != '\0')
 		{
 			if (!(str[i] == 'v' || str[i] == 't' || str[i] == 'c' ||\
-						str[i] == 'p'))
+						str[i] == 'p' || str[i] == 'b'))
 				return (-1);
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 18:40:35 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 20:23:47 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_ant
 	t_dome			*room;
 	t_dome			*prev;
 	int				played;
+	int				ate;
 }					t_ant;
 
 typedef struct		s_lm
@@ -86,13 +87,14 @@ void				find_connections(t_list **file, t_dome **room, int *t_opt);
 int					ft_is_solvable(t_dome *room);
 
 t_list				*instantiate_ants(int n, t_dome *room);
-void				little_ant_gonna_lift(t_list *la, t_dome *hd, t_dome *ed);
 void				reinit_depth(t_dome *rooms);
+void				find_your_raison_d_etre(t_ant *ant, t_dome *head, int *opt);
 void				shit_just_got_serious(t_lm box);
 
 void				print_turn(t_list *ants);
 void				print_file_and_bye(t_list **file, int *t_opt);
 void				print_count_turn(int count, int opt);
+void				print_pizza(t_dome *head, int nbants, int opt);
 
 void				print_rooms(t_dome *room);
 void				print_room_links(char *name, t_dome *room);

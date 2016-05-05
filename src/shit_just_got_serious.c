@@ -6,33 +6,11 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:32:01 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 18:43:50 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 20:19:55 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
-
-void		print_pizza(t_dome *head, int nbants, int opt)
-{
-	if (!opt)
-		return ;
-	while (head)
-	{
-		if (head->pizza >= 0)
-		{
-			ft_putstr("Amount of ants bypassing @So Gusto: ");
-			ft_putnbr(head->pizza);
-			ft_putchar('\n');
-			if (head->pizza != nbants)
-			{
-				ft_putnbr(nbants - head->pizza);
-				ft_putstr(" ants are still starving 😣");
-			}
-			return ;
-		}
-		head = head->next;
-	}
-}
 
 static int	all_done(t_list *ants)
 {
@@ -60,6 +38,39 @@ static void	reset_turn(t_list *ants)
 	}
 }
 
+static void	subarashiki_kono_sekai(t_dome *current)
+{
+	t_list	*side;
+
+	side = current->adj;
+	while (side != NULL)
+	{
+		if ((current->depth < ((t_dome *)side->content)->depth\
+				   	|| ((t_dome *)side->content)->depth == -1) \
+				&& ((t_dome *)side->content)->occupied == 0)
+		{
+			((t_dome *)side->content)->depth = current->depth + 1;
+			subarashiki_kono_sekai(((t_dome *)side->content));
+		}
+		side = side->next;
+	}
+}
+
+static void	little_ant_gonna_lift(t_lm box, t_dome *ed)
+{
+	t_ant	*ant;
+	t_list	*la;
+
+	la = box.ants;
+	while (la != NULL)
+	{
+		ant = (t_ant *)la->content;
+		subarashiki_kono_sekai(ed);
+		find_your_raison_d_etre(ant, box.rooms, box.opt);
+		la = la->next;
+	}
+}
+
 void		shit_just_got_serious(t_lm box)
 {
 	t_dome	*end;
@@ -67,10 +78,10 @@ void		shit_just_got_serious(t_lm box)
 
 	count = 1;
 	end = get_room(box.rooms, EDROOM);
-	while (42)
+	while (32)
 	{
 //		if (!opt['s'])
-			little_ant_gonna_lift(box.ants, box.rooms, end);
+		little_ant_gonna_lift(box, end);
 //		else
 //			aint_gonna_give_a_shit(ants, hd, end);
 		print_turn(box.ants);
