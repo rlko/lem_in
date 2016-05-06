@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 15:02:00 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 22:08:45 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/06 00:04:27 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char		illegal_opt(char *str)
 	while (str[i] != '\0')
 	{
 		if (!(str[i] == 'v' || str[i] == 't' || str[i] == 'c' ||
-				str[i] == 'p' || str[i] == 'b'))
+				str[i] == 'p' || str[i] == 'b' || str[i] == 's'))
 			return (str[i]);
 		i++;
 	}
@@ -47,7 +47,7 @@ static int		legit_opt(char *str)
 		while (str[i] != '\0')
 		{
 			if (!(str[i] == 'v' || str[i] == 't' || str[i] == 'c' ||\
-						str[i] == 'p' || str[i] == 'b'))
+						str[i] == 'p' || str[i] == 'b' || str[i] == 's'))
 				return (-1);
 			i++;
 		}

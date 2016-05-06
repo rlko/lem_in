@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 22:08:24 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 23:45:41 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int			main(int ac, char **av)
 	find_connections(&file, &box.rooms, box.opt);
 	if (!ft_is_solvable(box.rooms))
 		return (ft_verror("Invalid map", box.opt));
+	if (box.opt['s'])
+		return(once_upon_a_time(box));
 	print_file_and_bye(&file, box.opt);
 	box.ants = instantiate_ants(box.nb_ants, box.rooms);	
 	shit_just_got_serious(box);

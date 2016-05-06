@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 20:19:18 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 21:16:23 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/05 23:22:04 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,11 @@ void		print_pizza(t_dome *head, int nbants, int opt)
 		}
 		head = head->next;
 	}
+}
+
+void		ft_print_pizzatime(t_ant *ant)
+{
+	ft_putchar('L');
+	ft_putnbr(ant->id);
+	ft_putendl(" found a slice of pizza!");
 }
