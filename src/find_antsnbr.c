@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:19:29 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 02:08:27 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 03:37:12 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int		get_antsnbr(char *str)
 	char		*check;
 
 	a = ft_atoi(str);
+	if (!a)
+		return (0);
 	while (*str == '0')
 		++str;
 	if (!(check = ft_itoa(a)))

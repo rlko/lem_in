@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:32:01 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/07 02:48:07 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 03:23:10 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,7 @@ void		shit_just_got_serious(t_lm box)
 	end = get_room(box.rooms, EDROOM);
 	while (32)
 	{
-//		if (!opt['s'])
 		little_ant_gonna_lift(box, end);
-//		else
-//			aint_gonna_give_a_shit(ants, hd, end);
 		print_turn(box.ants);
 		if (all_done(box.ants))
 			break ; 
@@ -115,6 +112,6 @@ void		shit_just_got_serious(t_lm box)
 		reinit_depth(box.rooms);
 		++count;
 	}
-	print_count_turn(count, box.opt['t']);
+	print_count_turn(count, box.opt);
 	print_pizza(box.rooms, box.nb_ants, box.opt);
 }

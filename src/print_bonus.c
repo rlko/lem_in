@@ -6,11 +6,27 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 20:19:18 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/07 02:56:46 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 03:18:20 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
+
+static void	print_pizza_suite(int pizza, int nbants)
+{
+	if (pizza != nbants)
+	{
+		ft_putchar('\n');
+		ft_putnbr(nbants - pizza);
+		ft_putstr(" ants are still starving. 😣");
+		ft_putstr(" which is about ");
+		ft_putnbr(((nbants - pizza) * 100) / nbants);
+		ft_putstr("% of total ants.");
+	}
+	else
+		ft_putstr(" 😋");
+	ft_putchar('\n');
+}
 
 void		print_pizza(t_dome *head, int nbants, int *opt)
 {
@@ -23,20 +39,15 @@ void		print_pizza(t_dome *head, int nbants, int *opt)
 			if (!opt['c'])
 				ft_putstr("\nAmount of ants bypassed by So Gusto: ");
 			else
-				ft_putstr("\nAmount of ants bypassed by \x1b[32;21mSo \x1b[37;21mGus\x1b[31;21mto\x1b[0m: ");
-			ft_putnbr(head->pizza);
-			ft_putstr(" ants");
-			ft_putchar('\n');
-			if (head->pizza != nbants)
 			{
-				ft_putnbr(nbants - head->pizza);
-				ft_putstr("/");
-				ft_putnbr(nbants);
-				ft_putstr(" ants are still starving. 😣");
-				ft_putstr(" which is about ");
-				ft_putnbr(((nbants - head->pizza) * 100) / nbants);
-				ft_putstr("% of total ants.");
+				ft_putstr("\nAmount of ants bypassed by ");
+				ft_putstr("\x1b[32;21mSo \x1b[37;21mGus\x1b[31;21mto\x1b[0m: ");
 			}
+			ft_putnbr(head->pizza);
+			ft_putstr("/");
+			ft_putnbr(nbants);
+			ft_putstr(" ants.");
+			print_pizza_suite(head->pizza, nbants);
 			return ;
 		}
 		head = head->next;
@@ -54,7 +65,7 @@ void		ft_print_pizzatime(t_ant *ant, int *opt)
 
 }
 
-void	print_rooms_route(t_list *route)
+static void	print_rooms_route(t_list *route)
 {
 	while (route)
 	{
@@ -69,7 +80,7 @@ void	print_rooms_route(t_list *route)
 	}
 }
 
-void	print_route(t_list **route, t_dome *rooms)
+void		print_route(t_list **route, t_dome *rooms)
 {
 	t_list	*node;
 	t_list	*lst;

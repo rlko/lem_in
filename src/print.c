@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 21:03:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 02:42:28 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 03:22:41 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,21 @@ void	print_file_and_bye(t_list **file, int *t_opt)
 	ft_putchar('\n');
 }
 
-void	print_count_turn(int count, int opt)
+void	print_count_turn(int count, int *opt)
 {
-	if (opt)
+	if (opt['t'])
 	{
-		ft_putstr("\nGame done in \x1b[32m");
-		ft_putnbr(count);
-		ft_putendl("\x1b[0m turns...");
+		if (opt['c'])
+		{
+			ft_putstr("\nGame done in \x1b[32m");
+			ft_putnbr(count);
+			ft_putendl("\x1b[0m turns...");
+		}
+		else
+		{
+			ft_putstr("\nGame done in ");
+			ft_putnbr(count);
+			ft_putendl("\x1b[0m turns...");
+		}
 	}
 }

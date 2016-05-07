@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 02:48:19 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 03:24:20 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void				shit_just_got_serious(t_lm box);
 
 void				print_turn(t_list *ants);
 void				print_file_and_bye(t_list **file, int *t_opt);
-void				print_count_turn(int count, int opt);
+void				print_count_turn(int count, int *opt);
 void				print_pizza(t_dome *head, int nbants, int *opt);
 void				ft_print_pizzatime(t_ant *ant, int *opt);
 //void				print_route(t_dome *rooms, int *opt);

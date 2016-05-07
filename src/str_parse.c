@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:17:02 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 17:35:55 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 03:32:52 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,15 @@ int		str_iscommand(char *str, int strict, int opt)
 int		ft_verror(char *verbose, int *t_opt)
 {
 	if (!t_opt['v'])
+	{
+		if (t_opt['c'])
+			return(ft_error("\x1b[31mERROR\x1b[0m"));
 		return (ft_error("ERROR"));
-	ft_putstr_fd("ERROR: ", 2);
+	}
+	if (t_opt['c'])
+		ft_putstr_fd("\x1b[31mERROR\x1b[0m: ", 2);
+	else
+		ft_putstr_fd("ERROR: ", 2);
 	ft_putstr_fd(verbose, 2);
 	ft_putchar_fd('\n', 2);
 	return (1);
@@ -46,8 +53,15 @@ int		ft_verror(char *verbose, int *t_opt)
 void	ft_exit_verror(char *verbose, int *t_opt)
 {
 	if (!t_opt['v'])
+	{
+		if (t_opt['c'])
+			ft_exit_error("\x1b[31mERROR\x1b[0m");
 		ft_exit_error("ERROR");
-	ft_putstr_fd("ERROR: ", 2);
+	}
+	if (t_opt['c'])
+		ft_putstr_fd("\x1b[31mERROR\x1b[0m: ", 2);
+	else
+		ft_putstr_fd("ERROR: ", 2);
 	ft_putstr_fd(verbose, 2);
 	ft_putchar_fd('\n', 2);
 	exit(EXIT_FAILURE);
