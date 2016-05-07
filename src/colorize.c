@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 15:35:05 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:35:07 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 17:44:20 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static char	*room_color(char *str, enum e_type type)
 	char	*new;
 
 	if (type == STROOM)
-		new = ft_strcolordup(C_BLUE, str);
+		new = ft_strcolordup(C_RED, str);
 	else if (type == EDROOM)
 		new = ft_strcolordup(C_RED, str);
 	else if (type == PIZZA)
 		new = ft_strcolordup(C_YELLOW, str);
 	else
-		new = ft_strcolordup(C_MAGENTA, str);
+		new = ft_strcolordup(C_BLUE, str);
 	return (new);
 }
 

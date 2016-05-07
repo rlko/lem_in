@@ -6,11 +6,23 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:49:39 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 18:29:20 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
+
+void		lemin_usage(void)
+{
+	ft_putendl_fd("Usage: ./lem-in [options] < [file]", 2);
+	ft_putendl_fd("lem-in options:", 2);
+	ft_putendl_fd("   -b   Enable to buff ants", 2);
+	ft_putendl_fd("   -c   Colorize output", 2);
+	ft_putendl_fd("   -p   Allow to 🍕", 2);
+	ft_putendl_fd("   -t   Display turns summary", 2);
+	ft_putendl_fd("   -r   Display shortest route(s)", 2);
+	ft_putendl_fd("   -v   Write verbose", 2);
+}
 
 t_list		**ft_lsttower(t_list **head, char *str)
 {
@@ -77,7 +89,10 @@ int			main(int ac, char **av)
 	if (box.opt['b'] && !box.opt['p'])
 		return (ft_error("Error: option -b cannot work wihout option -p"));
 	if (av[0])
-		return (ft_error("Usage: ./lem-in [-bcprtv] < [file]"));
+	{
+		lemin_usage();
+		return (1);
+	}
 	file = NULL;
 	if (!(box.nb_ants = find_antsnbr(&file, box.opt)))
 		return (ft_verror("Invalid ants number", box.opt));

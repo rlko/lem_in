@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:58:44 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 18:29:39 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void				reinit_depth(t_dome *rooms);
 void				find_your_raison_d_etre(t_ant *ant, t_dome *head, int *opt);
 void				shit_just_got_serious(t_lm box);
 
+void				lemin_usage(void);
 void				print_turn(t_list *ants);
 void				print_file_and_bye(t_list **file, int *t_opt);
 void				print_count_turn(int count, int *opt);
