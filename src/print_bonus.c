@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/05 20:19:18 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/07 03:18:20 by akarin           ###   ########.fr       */
+/*   Created: 2016/05/07 15:34:48 by rliou-ke          #+#    #+#             */
+/*   Updated: 2016/05/07 15:34:50 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		print_pizza(t_dome *head, int nbants, int *opt)
 				ft_putstr("\x1b[32;21mSo \x1b[37;21mGus\x1b[31;21mto\x1b[0m: ");
 			}
 			ft_putnbr(head->pizza);
-			ft_putstr("/");
+			ft_putchar('/');
 			ft_putnbr(nbants);
 			ft_putstr(" ants.");
 			print_pizza_suite(head->pizza, nbants);
