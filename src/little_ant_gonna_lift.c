@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:28:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:41:39 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:52:21 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		subarashiki_kono_sekai(t_dome *current)
 	side = current->adj;
 	while (side != NULL)
 	{
-		if ((current->depth < ((t_dome *)side->content)->depth\
-				   	|| ((t_dome *)side->content)->depth == -1) \
+		if ((current->depth < ((t_dome *)side->content)->depth \
+					|| ((t_dome *)side->content)->depth == -1) \
 				&& ((t_dome *)side->content)->occupied == 0)
 		{
 			((t_dome *)side->content)->depth = current->depth + 1;
@@ -32,7 +32,7 @@ void		subarashiki_kono_sekai(t_dome *current)
 
 t_dome		*get_next_room(t_dome *current, t_dome *prev)
 {
-	t_list *link;
+	t_list	*link;
 	t_dome	*room;
 	t_dome	*dest;
 
@@ -46,7 +46,7 @@ t_dome		*get_next_room(t_dome *current, t_dome *prev)
 		else if (dest)
 		{
 			if (dest->depth > room->depth && room->depth != -1 && room != prev)
-			dest = room;
+				dest = room;
 		}
 		link = link->next;
 	}
@@ -58,7 +58,7 @@ t_dome		*get_next_room(t_dome *current, t_dome *prev)
 	return (NULL);
 }
 
-void	reinit_depth(t_dome *rooms)
+void		reinit_depth(t_dome *rooms)
 {
 	while (rooms)
 	{
@@ -70,7 +70,7 @@ void	reinit_depth(t_dome *rooms)
 	}
 }
 
-void	little_ant_gonna_lift(t_list *la, t_dome *hd, t_dome *ed)
+void		little_ant_gonna_lift(t_list *la, t_dome *hd, t_dome *ed)
 {
 	t_ant	*ant;
 	t_dome	*dest;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shit_just_got_serious.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rliou-ke <rliou-ke@student.42.fr>            +#+  +:+       +#+      */
+/*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:32:01 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:44:00 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:57:54 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void	subarashiki_kono_sekai(t_dome *current)
 	side = current->adj;
 	while (side != NULL)
 	{
-		if ((current->depth < ((t_dome *)side->content)->depth\
-				   	|| ((t_dome *)side->content)->depth == -1) \
+		if ((current->depth < ((t_dome *)side->content)->depth
+					|| ((t_dome *)side->content)->depth == -1)
 				&& ((t_dome *)side->content)->occupied == 0)
 		{
 			((t_dome *)side->content)->depth = current->depth + 1;
@@ -56,26 +56,12 @@ static void	subarashiki_kono_sekai(t_dome *current)
 	}
 }
 
-int			get_max_depth(t_dome *rooms)
-{
-	int i;
-
-	i = -2;
-	while (rooms)
-	{
-		if (rooms->depth > i)
-			i = rooms->depth;
-		rooms = rooms->next;
-	}
-	return (i);
-}
-
 static void	little_ant_gonna_lift(t_lm box, t_dome *ed)
 {
-	t_ant	*ant;
-	t_list	*la;
-	static int i = 0;
-	t_list	*route;
+	static int	i = 0;
+	t_ant		*ant;
+	t_list		*la;
+	t_list		*route;
 
 	la = box.ants;
 	route = NULL;
@@ -107,7 +93,7 @@ void		shit_just_got_serious(t_lm box)
 		little_ant_gonna_lift(box, end);
 		print_turn(box.ants);
 		if (all_done(box.ants))
-			break ; 
+			break ;
 		reset_turn(box.ants);
 		reinit_depth(box.rooms);
 		++count;

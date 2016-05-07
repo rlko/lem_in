@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:45:32 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:58:44 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct		s_lm
 	int				nb_ants;
 	t_dome			*rooms;
 	t_list			*ants;
-	int				opt[128];	
+	int				opt[128];
 }					t_lm;
 
 char				**read_opts(int *t_opt, char **av);

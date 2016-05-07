@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 15:38:03 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:38:04 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:47:53 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_dome			*find_rooms(t_list **file, int *t_opt)
 		if (!str_iscomment(line) && !str_iscommand(line, 1, t_opt['p']))
 		{
 			if (!(ret[2] = mk_rooms(&rooms, &prev, line, t_opt)))
-					return (rooms);
+				return (rooms);
 		}
 		if ((ret[1] = is_unique(line, t_opt['p'])) > 1)
 			ft_exit_verror("More than 1 known command each used", t_opt);

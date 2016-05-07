@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 21:03:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:43:17 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:53:13 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		print_turn(t_list *ants)
 	ft_putchar('\n');
 }
 
-void	print_file_and_bye(t_list **file, int *t_opt)
+void		print_file_and_bye(t_list **file, int *t_opt)
 {
 	t_list	*del;
 
@@ -75,7 +75,7 @@ void	print_file_and_bye(t_list **file, int *t_opt)
 	ft_putchar('\n');
 }
 
-void	print_count_turn(int count, int *opt)
+void		print_count_turn(int count, int *opt)
 {
 	if (opt['t'])
 	{

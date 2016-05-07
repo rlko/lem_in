@@ -6,7 +6,7 @@
 #    By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/07 18:21:40 by rliou-ke          #+#    #+#              #
-#    Updated: 2016/05/07 15:46:25 by rliou-ke         ###   ########.fr        #
+#    Updated: 2016/05/07 17:06:29 by rliou-ke         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC		=	main.c get_next_line.c find_antsnbr.c str_parse.c \
 			find_rooms.c assign.c mk_rooms.c fill_connections.c get_room_links.c \
 			find_connections.c ft_is_solvable.c print.c instantiate_ants.c\
 			find_your_raison_d_etre.c shit_just_got_serious.c read_opts.c colorize.c\
-			print_bonus.c \
+			print_bonus_pizza.c print_bonus_route.c
 OBJDIR	=	trash
 OBJ		=	$(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
 LIB		=	-L libft/ -lft

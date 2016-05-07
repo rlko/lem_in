@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:17:02 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:44:08 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:51:07 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_verror(char *verbose, int *t_opt)
 	if (!t_opt['v'])
 	{
 		if (t_opt['c'])
-			return(ft_error("\x1b[31mERROR\x1b[0m"));
+			return (ft_error("\x1b[31mERROR\x1b[0m"));
 		return (ft_error("ERROR"));
 	}
 	if (t_opt['c'])

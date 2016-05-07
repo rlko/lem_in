@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 15:38:12 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:38:14 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:48:44 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_dome	*get_next_room(t_dome *current, t_dome *prev)
 		else if (dest)
 		{
 			if (dest->depth > room->depth && room->depth != -1 && room != prev)
-			dest = room;
+				dest = room;
 		}
 		link = link->next;
 	}
@@ -76,7 +76,7 @@ static void		find_libre_pizza(t_ant *ant, t_dome *head, int *opt)
 void			find_your_raison_d_etre(t_ant *ant, t_dome *head, int *opt)
 {
 	t_dome		*dest;
-	
+
 	if ((dest = get_next_room(ant->room, ant->prev)))
 	{
 		ant->prev = ant->room;

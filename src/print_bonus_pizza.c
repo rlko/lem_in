@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_bonus.c                                      :+:      :+:    :+:   */
+/*   print_bonus_pizza.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 15:34:48 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 15:34:50 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 17:06:42 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,46 +62,4 @@ void		ft_print_pizzatime(t_ant *ant, int *opt)
 		ft_putendl(" found a slice of \x1b[33mpizza\x1b[0m!");
 	else
 		ft_putendl(" found a slice of pizza!");
-
-}
-
-static void	print_rooms_route(t_list *route)
-{
-	while (route)
-	{
-		ft_putchar('[');
-		ft_putstr(route->content);
-		ft_putchar(']');
-		if (route->next)
-			ft_putstr("->");
-		else
-			ft_putchar('\n');
-		route = route->next;
-	}
-}
-
-void		print_route(t_list **route, t_dome *rooms)
-{
-	t_list	*node;
-	t_list	*lst;
-	t_dome	*adj;
-
-	if (!(node = malloc(sizeof(*node))))
-		ft_exit_error("print_route: malloc: node");
-	node->content = rooms->name;
-	ft_lstappend(route, node);
-	if (rooms->type == EDROOM)
-		print_rooms_route(*route);
-	else
-	{
-		lst = rooms->adj;
-		while (lst)
-		{
-			adj = lst->content;
-			if (adj->depth == rooms->depth - 1)
-				print_route(route, adj);
-			lst = lst->next;
-		}
-	}
-	free(node);
 }
