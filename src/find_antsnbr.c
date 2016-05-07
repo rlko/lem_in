@@ -6,37 +6,41 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:19:29 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 03:37:12 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 04:08:05 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
 
+static int		free_zero(char **str)
+{
+	free(*str);
+	str = NULL;
+	return (0);
+}
+
 static int		get_antsnbr(char *str)
 {
 	int			a;
 	char		*check;
+	char		*s;
 
+	s = str;
 	a = ft_atoi(str);
 	if (!a)
-		return (0);
+		return (free_zero(&str));
 	while (*str == '0')
 		++str;
 	if (!(check = ft_itoa(a)))
 		return (0);
 	if (ft_strequ(check, str) && a > 0)
 	{
-		ft_strdel(&str);
+		free(check);
+		free(s);
 		return (a);
 	}
-	ft_strdel(&str);
-	return (0);
-}
-
-static int		free_zero(char **str)
-{
-	free(*str);
-	str = NULL;
+	free(s);
+	free(check);
 	return (0);
 }
 

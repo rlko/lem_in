@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 13:57:40 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 02:30:17 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 04:05:31 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int		count_char(char *str, char c)
 	return (i);
 }
 
-static int		split_parse(char *line, t_list **lst, t_dome *head)
+static int		split_parse(char *line, t_list **lst, t_dome *head, int *opt)
 {
 	int			nb_node;
 	char		*str;
@@ -79,7 +79,7 @@ static int		split_parse(char *line, t_list **lst, t_dome *head)
 		if (data_are_unique(head, *lst))
 			return (1);
 	}
-	ft_exit_error("ERROR");
+	ft_exit_verror("Bad room format", opt);
 	return (-42);
 }
 
@@ -106,7 +106,7 @@ int				mk_rooms(t_dome **head, char **prev, char *line, int *opt)
 
 	if (!line[0])
 		ft_exit_error("ERROR");
-	if (!split_parse(line, &lst, *head))
+	if (!split_parse(line, &lst, *head, opt))
 		return (0);
 	if (!(room = malloc(sizeof(*room))))
 		ft_exit_error("mk_rooms: room: malloc");
