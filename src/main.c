@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 10:05:35 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 23:45:41 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 02:59:28 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,14 @@ int			main(int ac, char **av)
 	if (box.opt['b'] && !box.opt['p'])
 		return (ft_error("Error: option -b cannot work wihout option -p"));
 	if (av[0])
-		return (ft_error("Usage: ./lem-in [-bcptv] < [file]"));
+		return (ft_error("Usage: ./lem-in [-bcprtv] < [file]"));
 	file = NULL;
 	if (!(box.nb_ants = find_antsnbr(&file, box.opt)))
 		return (ft_verror("Invalid ants number", box.opt));
 	box.rooms = find_rooms(&file, box.opt);
 	find_connections(&file, &box.rooms, box.opt);
-	if (!ft_is_solvable(box.rooms))
+	if (!ft_is_solvable(box.rooms, box.opt))
 		return (ft_verror("Invalid map", box.opt));
-	if (box.opt['s'])
-		return(once_upon_a_time(box));
 	print_file_and_bye(&file, box.opt);
 	box.ants = instantiate_ants(box.nb_ants, box.rooms);	
 	shit_just_got_serious(box);

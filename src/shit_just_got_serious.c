@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:32:01 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 20:19:55 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 02:48:07 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	all_done(t_list *ants)
 {
 	t_ant	*ant;
 
-	while (ants)
+	while (ants != NULL)
 	{
 		ant = (t_ant *)ants->content;
 		if (ant->room->type != EDROOM)
@@ -30,7 +30,7 @@ static void	reset_turn(t_list *ants)
 {
 	t_ant	*ant;
 
-	while (ants)
+	while (ants != NULL)
 	{
 		ant = (t_ant *)ants->content;
 		ant->played = 0;
@@ -56,16 +56,40 @@ static void	subarashiki_kono_sekai(t_dome *current)
 	}
 }
 
+int			get_max_depth(t_dome *rooms)
+{
+	int i;
+
+	i = -2;
+	while (rooms)
+	{
+		if (rooms->depth > i)
+			i = rooms->depth;
+		rooms = rooms->next;
+	}
+	return (i);
+}
+
 static void	little_ant_gonna_lift(t_lm box, t_dome *ed)
 {
 	t_ant	*ant;
 	t_list	*la;
+	static int i = 0;
+	t_list	*route;
 
 	la = box.ants;
+	route = NULL;
 	while (la != NULL)
 	{
 		ant = (t_ant *)la->content;
 		subarashiki_kono_sekai(ed);
+		if (!i && box.opt['r'])
+		{
+			ft_putendl("Fastest route(s):");
+			print_route(&route, get_room(box.rooms, STROOM));
+			ft_putchar('\n');
+		}
+		i = 1;
 		find_your_raison_d_etre(ant, box.rooms, box.opt);
 		la = la->next;
 	}
@@ -92,5 +116,5 @@ void		shit_just_got_serious(t_lm box)
 		++count;
 	}
 	print_count_turn(count, box.opt['t']);
-	print_pizza(box.rooms, box.nb_ants, box.opt['p']);
+	print_pizza(box.rooms, box.nb_ants, box.opt);
 }

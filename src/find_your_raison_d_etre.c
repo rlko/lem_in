@@ -6,7 +6,7 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 16:28:30 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 23:20:30 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 02:44:41 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		find_libre_pizza(t_ant *ant, t_dome *head, int *opt)
 
 	if (ant->room->pizza >= 0)
 	{
-		ft_print_pizzatime(ant);
+		ft_print_pizzatime(ant, opt);
 		ant->ate = 1;
 		++ant->room->pizza;
 	}

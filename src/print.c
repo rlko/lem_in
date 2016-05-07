@@ -6,15 +6,15 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 21:03:30 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/05 23:19:56 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 02:42:28 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
 
-static void	ft_putcolor(char *c, char *s)
+static void	ft_putcolor(char *color, char *s)
 {
-	ft_putstr(c);
+	ft_putstr(color);
 	ft_putstr(s);
 	ft_putendl(C_RESET);
 }

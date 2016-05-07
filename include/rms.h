@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 09:22:59 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/06 00:03:42 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 02:48:19 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void				fill_connections(t_list *lst, t_dome **head);
 int					get_room_links(char *line, t_dome **room);
 void				find_connections(t_list **file, t_dome **room, int *t_opt);
 
-int					ft_is_solvable(t_dome *room);
+int					ft_is_solvable(t_dome *room, int *opt);
+void				colorize(t_dome *rooms);
 
 t_list				*instantiate_ants(int n, t_dome *room);
 void				reinit_depth(t_dome *rooms);
@@ -94,10 +95,10 @@ void				shit_just_got_serious(t_lm box);
 void				print_turn(t_list *ants);
 void				print_file_and_bye(t_list **file, int *t_opt);
 void				print_count_turn(int count, int opt);
-void				print_pizza(t_dome *head, int nbants, int opt);
-void				ft_print_pizzatime(t_ant *ant);
-
-int					once_upon_a_time(t_lm box);
+void				print_pizza(t_dome *head, int nbants, int *opt);
+void				ft_print_pizzatime(t_ant *ant, int *opt);
+//void				print_route(t_dome *rooms, int *opt);
+void				print_route(t_list **route, t_dome *rooms);
 
 void				print_rooms(t_dome *room);
 void				print_room_links(char *name, t_dome *room);

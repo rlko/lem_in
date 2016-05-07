@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 13:50:27 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/04 14:13:37 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 02:34:33 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	reinit(t_dome *rooms)
 	}
 }
 
-int			ft_is_solvable(t_dome *room)
+int			ft_is_solvable(t_dome *room, int *opt)
 {
 	t_dome	*start;
 
@@ -56,6 +56,8 @@ int			ft_is_solvable(t_dome *room)
 	if (ft_tasukete(start))
 	{
 		reinit(room);
+		if (opt['c'])
+			colorize(room);
 		return (1);
 	}
 	return (0);

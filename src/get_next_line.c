@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 17:09:08 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/03/10 15:10:10 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/07 02:16:36 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int		rnl(int const fd, char **line, char **stock)
 
 	while ((ret = read(fd, buf, BUFF_SIZE)) && *stock)
 	{
+		if (ret == -1)
+			return (0);
 		buf[ret] = '\0';
 		if (ft_strchr(buf, '\n'))
 		{

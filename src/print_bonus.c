@@ -6,21 +6,24 @@
 /*   By: akarin <rliou-ke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 20:19:18 by akarin            #+#    #+#             */
-/*   Updated: 2016/05/05 23:22:04 by akarin           ###   ########.fr       */
+/*   Updated: 2016/05/07 02:56:46 by akarin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rms.h"
 
-void		print_pizza(t_dome *head, int nbants, int opt)
+void		print_pizza(t_dome *head, int nbants, int *opt)
 {
-	if (!opt)
+	if (!opt['p'])
 		return ;
 	while (head)
 	{
 		if (head->pizza >= 0)
 		{
-			ft_putstr("\nAmount of ants bypassed by So Gusto: ");
+			if (!opt['c'])
+				ft_putstr("\nAmount of ants bypassed by So Gusto: ");
+			else
+				ft_putstr("\nAmount of ants bypassed by \x1b[32;21mSo \x1b[37;21mGus\x1b[31;21mto\x1b[0m: ");
 			ft_putnbr(head->pizza);
 			ft_putstr(" ants");
 			ft_putchar('\n');
@@ -40,9 +43,54 @@ void		print_pizza(t_dome *head, int nbants, int opt)
 	}
 }
 
-void		ft_print_pizzatime(t_ant *ant)
+void		ft_print_pizzatime(t_ant *ant, int *opt)
 {
 	ft_putchar('L');
 	ft_putnbr(ant->id);
-	ft_putendl(" found a slice of pizza!");
+	if (opt['c'])
+		ft_putendl(" found a slice of \x1b[33mpizza\x1b[0m!");
+	else
+		ft_putendl(" found a slice of pizza!");
+
+}
+
+void	print_rooms_route(t_list *route)
+{
+	while (route)
+	{
+		ft_putchar('[');
+		ft_putstr(route->content);
+		ft_putchar(']');
+		if (route->next)
+			ft_putstr("->");
+		else
+			ft_putchar('\n');
+		route = route->next;
+	}
+}
+
+void	print_route(t_list **route, t_dome *rooms)
+{
+	t_list	*node;
+	t_list	*lst;
+	t_dome	*adj;
+
+	if (!(node = malloc(sizeof(*node))))
+		ft_exit_error("print_route: malloc: node");
+	node->content = rooms->name;
+	ft_lstappend(route, node);
+	if (rooms->type == EDROOM)
+		print_rooms_route(*route);
+	else
+	{
+		lst = rooms->adj;
+		while (lst)
+		{
+			adj = lst->content;
+			if (adj->depth == rooms->depth - 1)
+				print_route(route, adj);
+			lst = lst->next;
+		}
+	}
+	free(node);
 }
