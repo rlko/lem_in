@@ -6,7 +6,7 @@
 /*   By: rliou-ke <rliou-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 15:02:00 by rliou-ke          #+#    #+#             */
-/*   Updated: 2016/05/07 18:30:22 by rliou-ke         ###   ########.fr       */
+/*   Updated: 2016/05/08 16:58:02 by rliou-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		print_err_opt(char c)
 {
-	ft_putstr_fd("len-in: illegal option -- ", 2);
+	ft_putstr_fd("lem-in: illegal option -- ", 2);
 	ft_putchar(c);
 	ft_putchar_fd('\n', 2);
 	lemin_usage();
