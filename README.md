@@ -2,7 +2,10 @@ Lem\_in
 ======
 
 ###### School project
->       Little ants gonna lift
+
+Little ants gonna lift
+
+> This project consists of moving every ants from a starting point to an arrival point without losing a single one in an anthill set in a file. The main purpose of this project is to use a pathfinding algorithm to find an exit in any anthill configurated.
 
 **Download**
 * `git clone https://github.com/rlko/lem_in.git --recursive`
