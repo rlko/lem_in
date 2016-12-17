@@ -1,6 +1,6 @@
-[submodule "libft"]
-	path = libft
-	url = http://gogs.ded.eelon.moe/Lon/libft.git
 [submodule "generator"]
 	path = generator
 	url = https://github.com/cmehay/lem-in_generator.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/rlko/libft.git
