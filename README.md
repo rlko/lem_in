@@ -13,18 +13,12 @@ Lem\_in
 **Usage**
 * `./lem-in [options] < [file]`
 	* lem-in options:
-
-	-b   Enable to buff ants
-
-	-c   Colorize output
-
-	-p   Allow to 🍕
-
-	-t   Display turns summary
-
-	-r   Display shortest route(s)
-
-	-v   Write verbose
+<br /> -b   Enable to buff ants
+<br /> -c   Colorize output
+<br /> -p   Allow to 🍕
+<br /> -t   Display turns summary
+<br /> -r   Display shortest route(s)
+<br /> -v   Write verbose
 
 ---
 
