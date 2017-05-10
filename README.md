@@ -10,7 +10,7 @@ Little ants gonna lift
 **Download**
 * `git clone https://github.com/rlko/lem_in.git --recursive`
 
-**Install**
+**Compile**
 * `make`
 
 **Usage**
